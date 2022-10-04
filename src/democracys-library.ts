@@ -1,8 +1,8 @@
 import { html, css, LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 
-@customElement('your-webcomponent')
-export class YourWebComponent extends LitElement {
+@customElement('ia-democracys-library')
+export class IaDemocracysLibrary extends LitElement {
   @property({ type: String }) title = 'Hey there';
 
   @property({ type: Number }) counter = 5;
@@ -23,7 +23,11 @@ export class YourWebComponent extends LitElement {
     :host {
       display: block;
       padding: 25px;
-      color: var(--your-webcomponent-text-color, #000);
+      color: var(--ia-democracys-library-text-color, #000);
+    }
+
+    :host(:focus) {
+      outline: none;
     }
   `;
 }

@@ -1,4 +1,4 @@
-![Build Status](https://github.com/internetarchive/iaux-typescript-wc-template/actions/workflows/ci.yml/badge.svg) [![codecov](https://codecov.io/gh/internetarchive/iaux-typescript-wc-template/branch/main/graph/badge.svg?token=ZOYRJ2BV9W)](https://codecov.io/gh/internetarchive/iaux-typescript-wc-template)
+![Build Status](https://github.com/internetarchive/iaux-democracys-library/actions/workflows/ci.yml/badge.svg) [![codecov](https://codecov.io/gh/internetarchive/iaux-democracys-library/branch/main/graph/badge.svg?token=ZOYRJ2BV9W)](https://codecov.io/gh/internetarchive/iaux-democracys-library)
 
 # Internet Archive Typescript WebComponent Template
 
@@ -6,15 +6,7 @@ This is a base template for creating Typescript WebComponents. It is based off o
 
 ## Usage
 
-1. Click the "Use this Template" button in GitHub to create a new repository based on this one.
-2. Clone your new repo and update the things below:
-
-### Things to update in your copy
-1. Remove this section
-2. Search for the strings `your-webcomponent` and `YourWebComponent` and those are most of the spots that need to be updated.
-3. `README.md` (this file). Update the readme in general, but also the badge URLs
-4. `package.json` Update the name and description
-5. Rename the `your-webcomponent.ts` and its associated `.test` file
+`yarn install && yarn start`
 
 ## Local Demo with `web-dev-server`
 ```bash
@@ -79,9 +71,9 @@ Let's start with creating a `gh-pages` branch.
 This branch is where Github will look for the `index.html` to be hosted
 
 ```
-git checkout --orphan gh-pages
-git reset --hard
-git commit --allow-empty -m "Initializing gh-pages branch"
+git checkout --orphan gh-pages &&
+git reset --hard &&
+git commit --allow-empty -m "Initializing gh-pages branch" &&
 git push origin gh-pages
 ```
 
