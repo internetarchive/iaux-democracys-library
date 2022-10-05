@@ -35,11 +35,5 @@ export class ResourcesHighlights extends LitElement {
         width: 48%;
       }
     }
-
-    /* @media only screen and (min-width: 1001px) {
-      ::slotted(*) {
-        width: 32%;
-      }
-    } */
   `;
 }
