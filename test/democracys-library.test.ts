@@ -10,7 +10,6 @@ describe('IaDemocracysLibrary', () => {
     );
 
     expect(el.title).to.equal('Hey there');
-    expect(el.counter).to.equal(5);
   });
 
   it('increases the counter on button click', async () => {
@@ -18,8 +17,6 @@ describe('IaDemocracysLibrary', () => {
       html`<ia-democracys-library></ia-democracys-library>`
     );
     el.shadowRoot!.querySelector('button')!.click();
-
-    expect(el.counter).to.equal(6);
   });
 
   it('can override the title via attribute', async () => {
