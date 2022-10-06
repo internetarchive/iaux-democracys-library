@@ -26,7 +26,7 @@ export class IaDemocracysLibrary extends LitElement {
     fontStyle.innerHTML = `
     @font-face {
       font-family: "Teko";
-      src: url(https://archive.org/download/democracys-library/web-component/Teko-SemiBold.ttf);
+      src: url(https://archive.org/cors/democracys-library/web-component/Teko-SemiBold.ttf);
     }`;
     fontStyle.setAttribute('id', 'teko-font');
     document.head.appendChild(fontStyle);
@@ -80,7 +80,7 @@ export class IaDemocracysLibrary extends LitElement {
       <ti-tle class="green">${carousel1Title}</ti-tle>
       <section id="carousel-1" class="carousel">
         ${this.carousel1.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+          const tintColor = i % 2 === 0 ? 'green' : 'yellow';
           return this.carouselCard(card, tintColor);
         })}
       </section>
@@ -92,11 +92,19 @@ export class IaDemocracysLibrary extends LitElement {
       <ti-tle class="green">${carousel2Title}</ti-tle>
       <section id="carousel-2" class="carousel">
         ${this.carousel2.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+          const tintColor = i % 2 === 0 ? 'green' : 'yellow';
           return this.carouselCard(card, tintColor);
         })}
       </section>
     `;
+  }
+
+  get resourcesOptions(): TemplateResult {
+    return html`<option>Select a resource</option>`;
+  }
+
+  resourceSelected(e: Event): void {
+    console.log('resource selected ********', e);
   }
 
   render() {
@@ -106,14 +114,34 @@ export class IaDemocracysLibrary extends LitElement {
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.didYouKnow}</section>
         <resources-highlights>
-          <div id="map">
-            <ti-tle class="green">Resources</ti-tle>
-            <div id="map-img"></div>
-          </div>
-          ${this.highlights.map((card, i) => {
-            const tintColor = i % 2 === 0 ? 'yellow' : 'green';
-            return this.createCard(card, tintColor);
-          })}
+          <article>
+            <div class="title"><ti-tle>Resources</ti-tle></div>
+            <div id="map-img">
+              <img
+                src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
+                alt="map of united states and canada"
+              />
+            </div>
+            <div id="resources-options">
+              <label
+                for="select-resources"
+                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px"
+                >Select a resource:</label
+              >
+              <select
+                name="select-resources"
+                @select=${(e: Event) => this.resourceSelected(e)}
+              >
+                ${this.resourcesOptions}
+              </select>
+            </div>
+          </article>
+          ${
+            // eslint-disable-next-line arrow-body-style
+            this.highlights.map(card => {
+              return this.createCard(card, undefined);
+            })
+          }
         </resources-highlights>
         <section id="bottom-carousel">${this.bottomCarousel}</section>
       </section>
@@ -193,11 +221,37 @@ export class IaDemocracysLibrary extends LitElement {
       max-height: 220px;
       margin: 0 auto;
     }
-    article > a {
+    article > a,
+    article > select {
       grid-area: 7 / 3 / 7 / 8;
       vertical-align: baseline;
       display: flex;
     }
+
+    /* subparts of article */
+    #map-img {
+      background-color: #ebebff;
+      width: 100%;
+      grid-area: 2 / 1 / 7 / 8;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #map-img img {
+      object-fit: contain;
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+    #resources-options {
+      grid-area: 8 / 1 / 8 / 8;
+    }
+
+    #resources-options > select {
+      width: 100%;
+      display: block;
+    }
+    /* end subparts of article */
 
     /* Carousel */
     .carousel {
@@ -212,13 +266,6 @@ export class IaDemocracysLibrary extends LitElement {
     .carousel > * {
       scroll-snap-align: center;
     }
-
-    /* .carousel > *:nth-child(odd) {
-      background-color: #e3fdd5;
-    }
-    .carousel > *:nth-child(even) {
-      background-color: #fefe81;
-    } */
     /* End Carousel */
 
     resources-highlights > *:nth-child(odd) ti-tle {
@@ -228,11 +275,6 @@ export class IaDemocracysLibrary extends LitElement {
     resources-highlights > *:nth-child(even) ti-tle {
       /* yellow */
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 379 115' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m2.41535907.06436505 93.98160413 2.05968771 93.9636758.42943203 93.981604 2.05968771 93.963677.42943203-.665728 8.52369197-2.808745 8.5057642-.665728 8.523692-2.808745 8.5057641-1.871974-.0001517-.305648 2.5778912 2.129108 16.5918028-.996866 8.389818-90.463508 2.9353281-90.36899 4.449321-70.310096 2.2808389 70.18701.1005118 94.051638 1.4916745 94.184497.1335401.687706 8.9709079-1.47682 9.4913393.690908 8.8960033-1.472546 9.39132-94.020429-3.36343-94.324131-2.010171-93.1214334-3.337782-94.27554848-2.008784 1.27882743-7.2656845-.85881548-7.374232 1.27882743-7.2656841-.85881547-7.3742321 7.71912497.1217028.0436635-1.448196 2.2974858-8.048923.2360666-7.9550062 2.2974858-8.0489229 89.0683703-4.7902162 158.503928-5.8247357-167.8631141-2.9324015-92.63274412.0113194 1.47781288-8.9465155-2.26795466-14.9397675z' fill='%23e3fdd5' fill-rule='evenodd'/%3E%3C/svg%3E");
-    }
-
-    div#map > #map-img {
-      background-color: rgb(235, 235, 255);
-      height: 70%;
     }
   `;
 }
