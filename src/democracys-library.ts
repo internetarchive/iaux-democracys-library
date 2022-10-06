@@ -22,12 +22,11 @@ export class IaDemocracysLibrary extends LitElement {
   @property({ type: String }) fontSource = '';
 
   firstUpdated(): void {
-    const fontUrl = this.fontSource || '/assets/Teko-SemiBold.ttf';
     const fontStyle = document.createElement('style');
     fontStyle.innerHTML = `
     @font-face {
       font-family: "Teko";
-      src: url(${fontUrl});
+      src: url(https://archive.org/download/democracys-library/web-component/Teko-SemiBold.ttf);
     }`;
     fontStyle.setAttribute('id', 'teko-font');
     document.head.appendChild(fontStyle);
