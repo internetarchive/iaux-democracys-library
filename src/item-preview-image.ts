@@ -41,9 +41,9 @@ export class ItemPreviewImage extends LitElement {
     }
 
     img {
-      object-fit: contain;
-      max-width: 160px;
-      max-height: 260px;
+      object-fit: cover;
+      width: 160px;
+      height: 260px;
     }
 
     div#overlay {

@@ -39,7 +39,7 @@ export class IaDemocracysLibrary extends LitElement {
     }
   }
 
-  createCard(
+  resourceCard(
     card: card,
     tintColor: 'yellow' | 'green' | undefined
   ): TemplateResult {
@@ -139,7 +139,7 @@ export class IaDemocracysLibrary extends LitElement {
           ${
             // eslint-disable-next-line arrow-body-style
             this.highlights.map(card => {
-              return this.createCard(card, undefined);
+              return this.resourceCard(card, undefined);
             })
           }
         </resources-highlights>
@@ -255,12 +255,11 @@ export class IaDemocracysLibrary extends LitElement {
 
     /* Carousel */
     .carousel {
-      overflow-x: scroll;
+      overflow-x: auto;
       display: flex;
-      height: 260px;
       gap: 20px;
       scroll-snap-type: x mandatory;
-      padding: 10px 20px;
+      padding-bottom: 10px;
     }
 
     .carousel > * {
