@@ -16,7 +16,7 @@ export class ResourcesHighlights extends LitElement {
 
     ::slotted(*) {
       width: 32%;
-      border: 1px solid rgb(204, 204, 204);
+      border: 1px solid transparent;
       margin-bottom: 10px;
       max-height: 350px;
     }
@@ -30,7 +30,7 @@ export class ResourcesHighlights extends LitElement {
       }
     }
 
-    @media only screen and (min-width: 501px) and (max-width: 1000px) {
+    @media only screen and (min-width: 501px) and (max-width: 1300px) {
       ::slotted(*) {
         width: 48%;
       }

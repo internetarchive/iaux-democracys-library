@@ -18,22 +18,19 @@ export class ItemPreviewImage extends LitElement {
   static styles = css`
     :host {
       display: block;
-      border: 1px dotted red;
-      height: 260px;
-      width: 160px;
     }
 
     div {
       height: 260px;
       width: 160px;
       display: flex;
+      flex-direction: column;
     }
 
     img {
       object-fit: contain;
       max-width: 100%;
       max-height: 100%;
-      vertical-align: middle;
     }
   `;
 }
