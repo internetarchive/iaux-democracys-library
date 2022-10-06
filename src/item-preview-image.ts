@@ -20,17 +20,28 @@ export class ItemPreviewImage extends LitElement {
       display: block;
     }
 
+    :host(.yellow) div {
+      background-color: #fefe81;
+    }
+
+    :host(.green) div {
+      background-color: #e3fdd5;
+    }
+
+    :host(.yellow) img,
+    :host(.green) img {
+      mix-blend-mode: darken;
+    }
+
     div {
-      height: 260px;
-      width: 160px;
       display: flex;
       flex-direction: column;
     }
 
     img {
       object-fit: contain;
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 160px;
+      max-height: 260px;
     }
   `;
 }

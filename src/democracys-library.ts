@@ -40,13 +40,17 @@ export class IaDemocracysLibrary extends LitElement {
     }
   }
 
-  createCard(card: card): TemplateResult {
+  createCard(
+    card: card,
+    tintColor: 'yellow' | 'green' | undefined
+  ): TemplateResult {
     return html`
       <article>
         <div class="title"><ti-tle>${card.title}</ti-tle></div>
         <item-preview-image
           src=${card.image}
           alt="preview image."
+          class=${tintColor ?? ''}
         ></item-preview-image>
         <p>${card.blurb}</p>
         <a href=${card.link} tab="_blank"
@@ -56,13 +60,17 @@ export class IaDemocracysLibrary extends LitElement {
     `;
   }
 
-  carouselCard(card: CarouselCard): TemplateResult {
+  carouselCard(
+    card: CarouselCard,
+    tintColor: 'yellow' | 'green' | undefined
+  ): TemplateResult {
     const url = `https://archive.org/details/${card.id}`;
     return html`
       <a href=${url}>
         <item-preview-image
           src=${card.image}
           alt=${`Go to: ${card.title}`}
+          class=${tintColor ?? ''}
         ></item-preview-image>
       </a>
     `;
@@ -72,7 +80,10 @@ export class IaDemocracysLibrary extends LitElement {
     return html`
       <ti-tle class="green">${carousel1Title}</ti-tle>
       <section id="carousel-1" class="carousel">
-        ${this.carousel1.map(card => this.carouselCard(card))}
+        ${this.carousel1.map((card, i) => {
+          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+          return this.carouselCard(card, tintColor);
+        })}
       </section>
     `;
   }
@@ -81,7 +92,10 @@ export class IaDemocracysLibrary extends LitElement {
     return html`
       <ti-tle class="green">${carousel2Title}</ti-tle>
       <section id="carousel-2" class="carousel">
-        ${this.carousel2.map(card => this.carouselCard(card))}
+        ${this.carousel2.map((card, i) => {
+          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+          return this.carouselCard(card, tintColor);
+        })}
       </section>
     `;
   }
@@ -97,7 +111,10 @@ export class IaDemocracysLibrary extends LitElement {
             <ti-tle class="green">Resources</ti-tle>
             <div id="map-img"></div>
           </div>
-          ${this.highlights.map(card => this.createCard(card))}
+          ${this.highlights.map((card, i) => {
+            const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+            return this.createCard(card, tintColor);
+          })}
         </resources-highlights>
         <section id="bottom-carousel">${this.bottomCarousel}</section>
       </section>
@@ -197,12 +214,12 @@ export class IaDemocracysLibrary extends LitElement {
       scroll-snap-align: center;
     }
 
-    .carousel > *:nth-child(odd) {
+    /* .carousel > *:nth-child(odd) {
       background-color: #e3fdd5;
     }
     .carousel > *:nth-child(even) {
       background-color: #fefe81;
-    }
+    } */
     /* End Carousel */
 
     resources-highlights > *:nth-child(odd) ti-tle {
