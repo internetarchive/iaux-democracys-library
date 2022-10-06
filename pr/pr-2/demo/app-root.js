@@ -56,9 +56,9 @@ const ge=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     }
 
     img {
-      object-fit: contain;
-      max-width: 160px;
-      max-height: 260px;
+      object-fit: cover;
+      width: 160px;
+      height: 260px;
     }
 
     div#overlay {
@@ -115,7 +115,7 @@ const ge=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     @font-face {
       font-family: "Teko";
       src: url(https://archive.org/cors/democracys-library/web-component/Teko-SemiBold.ttf);
-    }`,e.setAttribute("id","teko-font"),document.head.appendChild(e)}disconnectedCallback(){const e=document.head.querySelector("#teko-font");e&&document.head.removeChild(e)}createCard(e,t){return m`
+    }`,e.setAttribute("id","teko-font"),document.head.appendChild(e)}disconnectedCallback(){const e=document.head.querySelector("#teko-font");e&&document.head.removeChild(e)}resourceCard(e,t){return m`
       <article>
         <div class="title"><ti-tle>${e.title}</ti-tle></div>
         <item-preview-image
@@ -174,7 +174,7 @@ const ge=function(){const e=document.createElement("link").relList;if(e&&e.suppo
               </select>
             </div>
           </article>
-          ${this.highlights.map(e=>this.createCard(e,void 0))}
+          ${this.highlights.map(e=>this.resourceCard(e,void 0))}
         </resources-highlights>
         <section id="bottom-carousel">${this.bottomCarousel}</section>
       </section>
@@ -285,12 +285,11 @@ const ge=function(){const e=document.createElement("link").relList;if(e&&e.suppo
 
     /* Carousel */
     .carousel {
-      overflow-x: scroll;
+      overflow-x: auto;
       display: flex;
-      height: 260px;
       gap: 20px;
       scroll-snap-type: x mandatory;
-      padding: 10px 20px;
+      padding-bottom: 10px;
     }
 
     .carousel > * {
