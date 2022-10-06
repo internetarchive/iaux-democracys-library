@@ -11,6 +11,7 @@ export class ItemPreviewImage extends LitElement {
     return html`
       <div>
         <img src=${this.src} alt=${this.alt} />
+        <div id="overlay"></div>
       </div>
     `;
   }
@@ -20,11 +21,11 @@ export class ItemPreviewImage extends LitElement {
       display: block;
     }
 
-    :host(.yellow) div {
+    :host(.yellow) div#overlay {
       background-color: #fefe81;
     }
 
-    :host(.green) div {
+    :host(.green) div#overlay {
       background-color: #e3fdd5;
     }
 
@@ -36,12 +37,22 @@ export class ItemPreviewImage extends LitElement {
     div {
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     img {
       object-fit: contain;
       max-width: 160px;
       max-height: 260px;
+    }
+
+    div#overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      mix-blend-mode: color;
     }
   `;
 }
