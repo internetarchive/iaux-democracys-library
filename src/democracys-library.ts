@@ -7,6 +7,7 @@ import './resources-highlights';
 import { carousel1, carousel1Title } from './data/carousel-1';
 import { carousel2, carousel2Title } from './data/carousel-2';
 import type { CarouselCard } from './data/carousel-1';
+import { headerImageUrl } from './data/header-image';
 import './ti-tle';
 
 @customElement('ia-democracys-library')
@@ -110,7 +111,9 @@ export class IaDemocracysLibrary extends LitElement {
   render() {
     return html`
       <section id="democracys-library-main">
-        <header>cool image goes here</header>
+        <div id="header-img">
+          <img src=${headerImageUrl} alt="Welcome to Democracy's Library" />
+        </div>
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.didYouKnow}</section>
         <resources-highlights>
@@ -162,11 +165,30 @@ export class IaDemocracysLibrary extends LitElement {
       outline: none;
     }
 
-    header {
-      height: 150px;
+    #header-img {
+      max-height: 150px;
       width: 100%;
-      background-color: lightseagreen;
-      margin: 0 auto;
+      background-color: rgb(227, 253, 213);
+      margin: 0px auto;
+      overflow: hidden;
+    }
+
+    #header-img img {
+      display: block;
+      object-fit: contain;
+      margin: 0px auto;
+      max-height: inherit;
+    }
+
+    @media (max-width: 500px) {
+      #header-img {
+        max-height: 70px;
+      }
+    }
+    @media (max-width: 999px) {
+      #header-img {
+        max-height: 100px;
+      }
     }
 
     section#democracys-library-main > section {
