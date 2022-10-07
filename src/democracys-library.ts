@@ -8,6 +8,7 @@ import { carousel1, carousel1Title } from './data/carousel-1';
 import { carousel2, carousel2Title } from './data/carousel-2';
 import type { CarouselCard } from './data/carousel-1';
 import { headerImageUrl } from './data/header-image';
+import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
 
 @customElement('ia-democracys-library')
@@ -16,7 +17,7 @@ export class IaDemocracysLibrary extends LitElement {
 
   @property({ type: Array }) carousel2: CarouselCard[] = carousel2;
 
-  @property({ type: Array }) didYouKnow = [];
+  @property({ type: Array }) didYouKnow: Factoid[] = didYouKnow;
 
   @property({ type: Array }) highlights: card[] = collectionsToHighlight;
 
@@ -40,13 +41,30 @@ export class IaDemocracysLibrary extends LitElement {
     }
   }
 
+  // <i><img src="https://archive.org/download/democracys-library/web-component/help.svg" alt="help icon"></i>
+  get factoids(): TemplateResult[] {
+    return this.didYouKnow.map((fact: Factoid, i) => {
+      const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+      return html`
+        <article>
+          <div class="title">
+            <ti-tle class=${tintColor}><span>DID YOU KNOW?</span></ti-tle>
+          </div>
+          <p class="full-width">${fact.details}</p>
+        </article>
+      `;
+    });
+  }
+
   resourceCard(
     card: card,
     tintColor: 'yellow' | 'green' | undefined
   ): TemplateResult {
     return html`
       <article>
-        <div class="title"><ti-tle>${card.title}</ti-tle></div>
+        <div class="title">
+          <ti-tle class=${tintColor ?? ''}>${card.title}</ti-tle>
+        </div>
         <item-preview-image
           src=${card.image}
           alt="preview image."
@@ -115,7 +133,7 @@ export class IaDemocracysLibrary extends LitElement {
           <img src=${headerImageUrl} alt="Welcome to Democracy's Library" />
         </div>
         <section id="top-carousel">${this.topCarousel}</section>
-        <section id="did-you-know">${this.didYouKnow}</section>
+        <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
           <article>
             <div class="title"><ti-tle>Resources</ti-tle></div>
@@ -142,8 +160,9 @@ export class IaDemocracysLibrary extends LitElement {
           </article>
           ${
             // eslint-disable-next-line arrow-body-style
-            this.highlights.map(card => {
-              return this.resourceCard(card, undefined);
+            this.highlights.map((card, i: number) => {
+              const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+              return this.resourceCard(card, tintColor);
             })
           }
         </resources-highlights>
@@ -191,6 +210,12 @@ export class IaDemocracysLibrary extends LitElement {
       }
     }
 
+    section#democracys-library-main {
+      margin-bottom: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
     section#democracys-library-main > section {
       margin-left: 10px !important;
       margin-right: 10px !important;
@@ -204,23 +229,20 @@ export class IaDemocracysLibrary extends LitElement {
 
     section#did-you-know {
       display: flex;
-      flex-direction: row;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
       gap: 20px;
     }
     section#did-you-know > * {
-      width: 50%;
+      border: 1px solid transparent;
     }
-    article[no-image] {
-      display: grid;
+    @media only screen and (max-width: 500px) {
+      section#did-you-know > * {
+        width: 100%;
+      }
     }
-    article[no-image] > p {
-      grid-area: 2 / 1 / 6 / 6;
-    }
-    article[no-image] > a {
-      grid-area: 5 / 1 / 6 / 6;
+    @media only screen and (min-width: 501px) and (max-width: 1300px) {
+      section#did-you-know > * {
+        width: 50%;
+      }
     }
 
     /* Resource/Collection Highlight */
@@ -237,12 +259,16 @@ export class IaDemocracysLibrary extends LitElement {
     article > item-preview-image {
       grid-area: 2 / 1 / 8 / 3;
     }
+    article > p.full-width {
+      grid-area: 2 / 1 / 7 / 7;
+    }
     article > p {
       grid-area: 2 / 3 / 7 / 8;
       overflow: auto;
       padding: 0px 10px 10px 0;
       max-height: 220px;
       margin: 0 auto;
+      word-break: break-word;
     }
     article > a,
     article > select {
@@ -292,20 +318,16 @@ export class IaDemocracysLibrary extends LitElement {
       gap: 20px;
       scroll-snap-type: x mandatory;
       padding-bottom: 10px;
+      scrollbar-width: none; /* Firefox */
     }
 
     .carousel > * {
       scroll-snap-align: center;
     }
-    /* End Carousel */
 
-    resources-highlights > *:nth-child(odd) ti-tle {
-      /* green */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 379 115'%3E%3Cpath d='m2.41535907.06436505 93.98160413 2.05968771 93.9636758.42943203 93.981604 2.05968771 93.963677.42943203-.665728 8.52369197-2.808745 8.5057642-.665728 8.523692-2.808745 8.5057641-1.871974-.0001517-.305648 2.5778912 2.129108 16.5918028-.996866 8.389818-90.463508 2.9353281-90.36899 4.449321-70.310096 2.2808389 70.18701.1005118 94.051638 1.4916745 94.184497.1335401.687706 8.9709079-1.47682 9.4913393.690908 8.8960033-1.472546 9.39132-94.020429-3.36343-94.324131-2.010171-93.1214334-3.337782-94.27554848-2.008784 1.27882743-7.2656845-.85881548-7.374232 1.27882743-7.2656841-.85881547-7.3742321 7.71912497.1217028.0436635-1.448196 2.2974858-8.048923.2360666-7.9550062 2.2974858-8.0489229 89.0683703-4.7902162 158.503928-5.8247357-167.8631141-2.9324015-92.63274412.0113194 1.47781288-8.9465155-2.26795466-14.9397675z' fill='%23fefe81' fill-rule='evenodd'/%3E%3C/svg%3E");
+    .carousel::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
-    resources-highlights > *:nth-child(even) ti-tle {
-      /* yellow */
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 379 115' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m2.41535907.06436505 93.98160413 2.05968771 93.9636758.42943203 93.981604 2.05968771 93.963677.42943203-.665728 8.52369197-2.808745 8.5057642-.665728 8.523692-2.808745 8.5057641-1.871974-.0001517-.305648 2.5778912 2.129108 16.5918028-.996866 8.389818-90.463508 2.9353281-90.36899 4.449321-70.310096 2.2808389 70.18701.1005118 94.051638 1.4916745 94.184497.1335401.687706 8.9709079-1.47682 9.4913393.690908 8.8960033-1.472546 9.39132-94.020429-3.36343-94.324131-2.010171-93.1214334-3.337782-94.27554848-2.008784 1.27882743-7.2656845-.85881548-7.374232 1.27882743-7.2656841-.85881547-7.3742321 7.71912497.1217028.0436635-1.448196 2.2974858-8.048923.2360666-7.9550062 2.2974858-8.0489229 89.0683703-4.7902162 158.503928-5.8247357-167.8631141-2.9324015-92.63274412.0113194 1.47781288-8.9465155-2.26795466-14.9397675z' fill='%23e3fdd5' fill-rule='evenodd'/%3E%3C/svg%3E");
-    }
+    /* End Carousel */
   `;
 }
