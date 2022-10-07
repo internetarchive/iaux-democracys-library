@@ -121,6 +121,7 @@ export class IaDemocracysLibrary extends LitElement {
                 src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
                 alt="map of united states and canada"
               />
+              <div id="map-overlay"></div>
             </div>
             <div id="resources-options">
               <label
@@ -230,7 +231,6 @@ export class IaDemocracysLibrary extends LitElement {
 
     /* subparts of article */
     #map-img {
-      background-color: #ebebff;
       width: 100%;
       grid-area: 2 / 1 / 7 / 8;
       overflow: hidden;
@@ -241,6 +241,16 @@ export class IaDemocracysLibrary extends LitElement {
       object-fit: contain;
       max-height: 100%;
       max-width: 100%;
+    }
+
+    #map-overlay {
+      background-color: #ebebff;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      mix-blend-mode: color;
     }
 
     #resources-options {
