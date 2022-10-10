@@ -1,8 +1,8 @@
 ![Build Status](https://github.com/internetarchive/iaux-democracys-library/actions/workflows/ci.yml/badge.svg) [![codecov](https://codecov.io/gh/internetarchive/iaux-democracys-library/branch/main/graph/badge.svg?token=ZOYRJ2BV9W)](https://codecov.io/gh/internetarchive/iaux-democracys-library)
 
-# Internet Archive Typescript WebComponent Template
+# A web component that highlights documents across various governments found on archive.org
 
-This is a base template for creating Typescript WebComponents. It is based off of the [Open WebComponents generator](https://open-wc.org/docs/development/generator/) with some IA-specific customizations and some development niceities.
+Demo App: https://internetarchive.github.io/iaux-democracys-library/main/demo/
 
 ## Usage
 
