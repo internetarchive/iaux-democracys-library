@@ -10,6 +10,7 @@ import type { CarouselCard } from './data/carousel-1';
 import { headerImageUrl } from './data/header-image';
 import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
+import './arti-cle';
 
 @customElement('ia-democracys-library')
 export class IaDemocracysLibrary extends LitElement {
@@ -46,12 +47,12 @@ export class IaDemocracysLibrary extends LitElement {
     return this.didYouKnow.map((fact: Factoid, i) => {
       const tintColor = i % 2 === 0 ? 'green' : 'yellow';
       return html`
-        <article>
+        <arti-cle>
           <div class="title">
             <ti-tle class=${tintColor}><span>DID YOU KNOW?</span></ti-tle>
           </div>
           <p class="full-width">${fact.details}</p>
-        </article>
+        </arti-cle>
       `;
     });
   }
@@ -61,7 +62,7 @@ export class IaDemocracysLibrary extends LitElement {
     tintColor: 'yellow' | 'green' | undefined
   ): TemplateResult {
     return html`
-      <article>
+      <arti-cle>
         <div class="title">
           <ti-tle class=${tintColor ?? ''}>${card.title}</ti-tle>
         </div>
@@ -133,14 +134,14 @@ export class IaDemocracysLibrary extends LitElement {
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
-          <article>
+          <arti-cle>
             <div class="title"><ti-tle>Resources</ti-tle></div>
-            <div id="map-img">
+            <div class="map-img">
               <img
                 src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
                 alt="map of united states and canada"
               />
-              <div id="map-overlay"></div>
+              <div class="map-overlay"></div>
             </div>
             <div id="resources-options">
               <label
@@ -155,7 +156,7 @@ export class IaDemocracysLibrary extends LitElement {
                 ${this.resourcesOptions}
               </select>
             </div>
-          </article>
+          </arti-cle>
           ${
             // eslint-disable-next-line arrow-body-style
             this.highlights.map((card, i: number) => {
@@ -243,53 +244,20 @@ export class IaDemocracysLibrary extends LitElement {
       }
     }
 
-    /* Resource/Collection Highlight */
-    article {
-      display: grid;
-      gap: 0px 20px;
-    }
-    article > * {
-      border: 1px solid transparent;
-    }
-    article > .title {
-      grid-area: 1 / 1 / 2 / 8;
-    }
-    article > item-preview-image {
-      grid-area: 2 / 1 / 8 / 3;
-    }
-    article > p.full-width {
-      grid-area: 2 / 1 / 7 / 7;
-    }
-    article > p {
-      grid-area: 2 / 3 / 7 / 8;
-      overflow: auto;
-      padding: 0px 10px 10px 0;
-      max-height: 220px;
-      margin: 0 auto;
-      word-break: break-word;
-    }
-    article > a,
-    article > select {
-      grid-area: 7 / 3 / 7 / 8;
-      vertical-align: baseline;
-      display: flex;
-    }
-
     /* subparts of article */
-    #map-img {
+    .map-img {
       width: 100%;
-      grid-area: 2 / 1 / 7 / 8;
       overflow: hidden;
       position: relative;
     }
 
-    #map-img img {
+    .map-img img {
       object-fit: contain;
       max-height: 100%;
       max-width: 100%;
     }
 
-    #map-overlay {
+    .map-overlay {
       background-color: #ebebff;
       position: absolute;
       top: 0;
