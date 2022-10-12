@@ -110,7 +110,11 @@ export class IaDemocracysLibrary extends LitElement {
   render() {
     return html`
       <section id="democracys-library-main">
-        <welcome-header><slot name="action-bar-section"></slot></welcome-header>
+        <welcome-header>
+          <div slot="action-bar-section">
+            <slot name="action-bar-section"></slot>
+          </div>
+        </welcome-header>
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
