@@ -7,10 +7,11 @@ import './resources-highlights';
 import { carousel1, carousel1Title } from './data/carousel-1';
 import { carousel2, carousel2Title } from './data/carousel-2';
 import type { CarouselCard } from './data/carousel-1';
-import { headerImageUrl } from './data/header-image';
+// import { headerImageUrl } from './data/header-image';
 import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
 import './arti-cle';
+import './header';
 
 @customElement('ia-democracys-library')
 export class IaDemocracysLibrary extends LitElement {
@@ -130,9 +131,7 @@ export class IaDemocracysLibrary extends LitElement {
   render() {
     return html`
       <section id="democracys-library-main">
-        <div id="header-img">
-          <img src=${headerImageUrl} alt="Welcome to Democracy's Library" />
-        </div>
+        <welcome-header></welcome-header>
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
@@ -193,12 +192,16 @@ export class IaDemocracysLibrary extends LitElement {
       overflow: hidden;
     }
 
-    #header-img img {
+    welcome-header {
+      background-color: #e3fdd5;
+    }
+
+    /* #header-img img {
       display: block;
       object-fit: contain;
       margin: 0px auto;
       max-height: inherit;
-    }
+    } */
 
     @media (max-width: 500px) {
       #header-img {
