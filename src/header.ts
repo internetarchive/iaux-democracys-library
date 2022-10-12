@@ -11,7 +11,9 @@ export class WelcomeHeader extends LitElement {
         >
         <div class="left"></div>
         <div class="pic"></div>
-        <div class="action-bar-section"><slot></slot></div>
+        <div class="action-bar-section">
+          <slot name="action-bar-section"></slot>
+        </div>
       </section>
     `;
   }
@@ -76,21 +78,21 @@ export class WelcomeHeader extends LitElement {
       }
     }
 
-    @media only screen and (min-width: 1200px) {
+    @media only screen and (min-width: 1301px) {
       :host {
         height: 230px !important;
       }
     }
 
-    @media only screen and (max-width: 1180px) {
+    @media only screen and (max-width: 1300px) {
       :host {
-        height: 150px !important;
+        height: 180px !important;
       }
     }
 
     @media only screen and (max-width: 990px) {
       :host {
-        height: 120px !important;
+        height: 150px !important;
       }
       .left {
         background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-mini.svg');
