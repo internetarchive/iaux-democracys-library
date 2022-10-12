@@ -46,7 +46,7 @@ export class IaDemocracysLibrary extends LitElement {
   // <i><img src="https://archive.org/download/democracys-library/web-component/help.svg" alt="help icon"></i>
   get factoids(): TemplateResult[] {
     return this.didYouKnow.map((fact: Factoid, i) => {
-      const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+      const tintColor = i % 2 === 0 ? 'yellow' : 'green';
       return html`
         <arti-cle>
           <div class="title">
@@ -60,10 +60,7 @@ export class IaDemocracysLibrary extends LitElement {
     });
   }
 
-  resourceCard(
-    card: card,
-    tintColor: 'yellow' | 'green' | undefined
-  ): TemplateResult {
+  resourceCard(card: card, tintColor: 'yellow' | 'green'): TemplateResult {
     return html`
       <arti-cle>
         <div class="title">
@@ -101,7 +98,7 @@ export class IaDemocracysLibrary extends LitElement {
       <ti-tle class="green">${carousel1Title}</ti-tle>
       <section id="carousel-1" class="carousel">
         ${this.carousel1.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
           return this.carouselCard(card, tintColor);
         })}
       </section>
@@ -136,7 +133,7 @@ export class IaDemocracysLibrary extends LitElement {
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
           <arti-cle>
-            <div class="title"><ti-tle>Resources</ti-tle></div>
+            <div class="title"><ti-tle class="green">Resources</ti-tle></div>
             <div class="map-img">
               <img
                 src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
@@ -161,7 +158,7 @@ export class IaDemocracysLibrary extends LitElement {
           ${
             // eslint-disable-next-line arrow-body-style
             this.highlights.map((card, i: number) => {
-              const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+              const tintColor = i % 2 === 0 ? 'yellow' : 'green';
               return this.resourceCard(card, tintColor);
             })
           }
