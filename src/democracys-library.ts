@@ -71,9 +71,7 @@ export class IaDemocracysLibrary extends LitElement {
           class=${tintColor ?? ''}
         ></item-preview-image>
         <p>${card.blurb}</p>
-        <a href=${card.link} tab="_blank"
-          >Browse the ${card.title} collection</a
-        >
+        <a href=${card.link} tab="_blank">Browse the ${card.collectionTitle}</a>
       </article>
     `;
   }
