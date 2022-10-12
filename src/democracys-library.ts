@@ -19,8 +19,6 @@ export class IaDemocracysLibrary extends LitElement {
 
   @property({ type: Array }) highlights: card[] = collectionsToHighlight;
 
-  @property({ type: String }) fontSource = '';
-
   firstUpdated(): void {
     const fontStyle = document.createElement('style');
     fontStyle.innerHTML = `
