@@ -49,7 +49,9 @@ export class IaDemocracysLibrary extends LitElement {
       return html`
         <arti-cle>
           <div class="title">
-            <ti-tle class=${tintColor}><span>DID YOU KNOW?</span></ti-tle>
+            <ti-tle class=${tintColor}
+              ><span class="did-you-know-title">DID YOU KNOW?</span></ti-tle
+            >
           </div>
           <p class="full-width">${fact.details}</p>
         </arti-cle>
@@ -295,5 +297,14 @@ export class IaDemocracysLibrary extends LitElement {
       display: none; /* Safari and Chrome */
     }
     /* End Carousel */
+
+    .did-you-know-title {
+      background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
+      padding-left: 30px;
+      background-repeat: no-repeat;
+      vertical-align: initial;
+      background-size: 28px;
+      background-position: 0 25%;
+    }
   `;
 }

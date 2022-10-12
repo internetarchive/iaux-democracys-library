@@ -18,7 +18,7 @@ export class TitleSection extends LitElement {
       margin-bottom: 10px;
       display: inline-block;
       text-transform: uppercase;
-      line-height: 30px;
+      line-height: 25px;
     }
 
     :host(.green) {
