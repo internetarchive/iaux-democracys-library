@@ -131,7 +131,7 @@ export class IaDemocracysLibrary extends LitElement {
   render() {
     return html`
       <section id="democracys-library-main">
-        <welcome-header></welcome-header>
+        <welcome-header><slot></slot></welcome-header>
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
@@ -184,34 +184,8 @@ export class IaDemocracysLibrary extends LitElement {
       outline: none;
     }
 
-    #header-img {
-      max-height: 150px;
-      width: 100%;
-      background-color: rgb(227, 253, 213);
-      margin: 0px auto;
-      overflow: hidden;
-    }
-
     welcome-header {
       background-color: #e3fdd5;
-    }
-
-    /* #header-img img {
-      display: block;
-      object-fit: contain;
-      margin: 0px auto;
-      max-height: inherit;
-    } */
-
-    @media (max-width: 500px) {
-      #header-img {
-        max-height: 70px;
-      }
-    }
-    @media (max-width: 999px) {
-      #header-img {
-        max-height: 100px;
-      }
     }
 
     section#democracys-library-main {
@@ -231,12 +205,21 @@ export class IaDemocracysLibrary extends LitElement {
       margin-right: auto;
     }
 
+    /** Did You Know */
     section#did-you-know {
       display: flex;
       gap: 20px;
     }
     section#did-you-know > * {
       border: 1px solid transparent;
+    }
+    .did-you-know-title {
+      background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
+      padding-left: 30px;
+      background-repeat: no-repeat;
+      vertical-align: initial;
+      background-size: 28px;
+      background-position: 0 25%;
     }
     @media only screen and (max-width: 500px) {
       section#did-you-know > * {
@@ -248,8 +231,9 @@ export class IaDemocracysLibrary extends LitElement {
         width: 50%;
       }
     }
+    /** End Did You Know */
 
-    /* subparts of article */
+    /* MAP */
     .map-img {
       width: 100%;
       overflow: hidden;
@@ -271,16 +255,17 @@ export class IaDemocracysLibrary extends LitElement {
       right: 0;
       mix-blend-mode: color;
     }
+    /* End MAP */
 
+    /** Resources */
     #resources-options {
       grid-area: 8 / 1 / 8 / 8;
     }
-
     #resources-options > select {
       width: 100%;
       display: block;
     }
-    /* end subparts of article */
+    /** End Resources */
 
     /* Carousel */
     .carousel {
@@ -291,23 +276,12 @@ export class IaDemocracysLibrary extends LitElement {
       padding-bottom: 10px;
       scrollbar-width: none; /* Firefox */
     }
-
     .carousel > * {
       scroll-snap-align: center;
     }
-
     .carousel::-webkit-scrollbar {
       display: none; /* Safari and Chrome */
     }
     /* End Carousel */
-
-    .did-you-know-title {
-      background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
-      padding-left: 30px;
-      background-repeat: no-repeat;
-      vertical-align: initial;
-      background-size: 28px;
-      background-position: 0 25%;
-    }
   `;
 }
