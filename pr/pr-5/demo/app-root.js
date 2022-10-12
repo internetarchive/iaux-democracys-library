@@ -302,7 +302,11 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       </section>
     `}get resourcesOptions(){return u`<option>Select a resource</option>`}resourceSelected(e){console.log("resource selected ********",e)}render(){return u`
       <section id="democracys-library-main">
-        <welcome-header><slot name="action-bar-section"></slot></welcome-header>
+        <welcome-header>
+          <div slot="action-bar-section">
+            <slot name="action-bar-section"></slot>
+          </div>
+        </welcome-header>
         <section id="top-carousel">${this.topCarousel}</section>
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
