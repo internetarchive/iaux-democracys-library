@@ -112,5 +112,25 @@ export class WelcomeHeader extends LitElement {
         width: 50px !important;
       }
     }
+
+    @media only screen and (max-width: 767px) {
+      :host {
+        height: var(--ia-dl-header-mobile-height, 88px) !important;
+      }
+
+      // this is when action bar drops to mini view
+      .pic {
+        right: 50px !important;
+      }
+      .action-bar-section {
+        width: 50px !important;
+      }
+    }
+
+    @media only screen and (max-width: 420px) {
+      .pic {
+        background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-mini.webp');
+      }
+    }
   `;
 }
