@@ -5,9 +5,7 @@ import { collectionsToHighlight } from './data/collections-to-highlight';
 import type { card } from './data/collections-to-highlight';
 import './resources-highlights';
 import { carousel1, carousel1Title } from './data/carousel-1';
-import { carousel2, carousel2Title } from './data/carousel-2';
 import type { CarouselCard } from './data/carousel-1';
-// import { headerImageUrl } from './data/header-image';
 import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
 import './arti-cle';
@@ -16,8 +14,6 @@ import './header';
 @customElement('ia-democracys-library')
 export class IaDemocracysLibrary extends LitElement {
   @property({ type: Array }) carousel1: CarouselCard[] = carousel1;
-
-  @property({ type: Array }) carousel2: CarouselCard[] = carousel2;
 
   @property({ type: Array }) didYouKnow: Factoid[] = didYouKnow;
 
@@ -105,18 +101,6 @@ export class IaDemocracysLibrary extends LitElement {
     `;
   }
 
-  get bottomCarousel(): TemplateResult {
-    return html`
-      <ti-tle class="green">${carousel2Title}</ti-tle>
-      <section id="carousel-2" class="carousel">
-        ${this.carousel2.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'green' : 'yellow';
-          return this.carouselCard(card, tintColor);
-        })}
-      </section>
-    `;
-  }
-
   get resourcesOptions(): TemplateResult {
     return html`<option>Select a resource</option>`;
   }
@@ -163,7 +147,6 @@ export class IaDemocracysLibrary extends LitElement {
             })
           }
         </resources-highlights>
-        <section id="bottom-carousel">${this.bottomCarousel}</section>
       </section>
     `;
   }
@@ -197,7 +180,6 @@ export class IaDemocracysLibrary extends LitElement {
     }
     section#democracys-library-main > *:not(:first-child) {
       margin-top: 10px;
-      margin-bottom: 10px;
       margin-left: auto;
       margin-right: auto;
     }

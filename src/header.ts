@@ -56,7 +56,7 @@ export class WelcomeHeader extends LitElement {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: right bottom;
-      background-image: url(https://archive.org/download/democracys-library/web-component/banner-image.webp);
+      background-image: url('https://archive.org/download/democracys-library/web-component/banner-image.webp');
     }
 
     .action-bar-section {
@@ -76,21 +76,24 @@ export class WelcomeHeader extends LitElement {
       }
     }
 
-    @media only screen and (min-width: 1168px) {
+    @media only screen and (min-width: 1200px) {
       :host {
         height: 230px !important;
       }
     }
 
-    @media only screen and (max-width: 1167px) {
+    @media only screen and (max-width: 1180px) {
       :host {
-        height: 170px !important;
+        height: 150px !important;
       }
     }
 
-    @media only screen and (max-width: 890px) {
+    @media only screen and (max-width: 990px) {
       :host {
         height: 120px !important;
+      }
+      .left {
+        background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-mini.svg');
       }
     }
 
