@@ -11,7 +11,7 @@ export class TitleSection extends LitElement {
     :host {
       font-family: 'Teko', sans-serif;
       font-size: 3rem;
-      padding-right: 10px;
+      padding: 10px 10px 10px 0;
       background-repeat: no-repeat;
       background-size: cover;
       margin-bottom: 10px;

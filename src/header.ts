@@ -99,7 +99,7 @@ export class WelcomeHeader extends LitElement {
 
     @media only screen and (max-width: 767px) {
       :host {
-        height: 88px !important;
+        height: var(--ia-dl-header-mobile-height, 88px) !important;
       }
 
       // this is when action bar drops to mini view
