@@ -141,7 +141,7 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       grid-area: 2 / 3 / 7 / 8;
       overflow: auto;
       padding: 0px 10px 10px 0;
-      max-height: 220px;
+      max-height: 150px;
       margin: 0 auto;
       word-break: break-word;
     }
@@ -371,6 +371,10 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     }
     section#democracys-library-main > *:not(:first-child) {
       margin-top: 10px;
+    }
+
+    section#democracys-library-main > * {
+      width: 100%;
     }
 
     /** Did You Know */
