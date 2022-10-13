@@ -218,9 +218,9 @@ export class IaDemocracysLibrary extends LitElement {
     :host(:focus) {
       outline: none;
     }
-    @media only screen and (min-width: 551px) and (max-width: 650px) {
-      :host {
-        --ia-dl-resource-card-img-width: 140px !important;
+    @media only screen and (min-width: 501px) and (max-width: 650px) {
+      resources-highlights {
+        --ia-dl-resource-card-img-width: 110px !important;
       }
     }
 
