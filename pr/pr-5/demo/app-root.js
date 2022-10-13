@@ -157,7 +157,7 @@ const Oe=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       grid-area: 2 / 3 / 7 / 8;
       overflow: auto;
       padding: 0px 10px 10px 0;
-      max-height: 150px;
+      max-height: 175px;
       margin: 0 auto;
       word-break: break-word;
     }
@@ -388,9 +388,9 @@ const Oe=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     :host(:focus) {
       outline: none;
     }
-    @media only screen and (min-width: 551px) and (max-width: 650px) {
-      :host {
-        --ia-dl-resource-card-img-width: 140px !important;
+    @media only screen and (min-width: 501px) and (max-width: 650px) {
+      resources-highlights {
+        --ia-dl-resource-card-img-width: 110px !important;
       }
     }
 
