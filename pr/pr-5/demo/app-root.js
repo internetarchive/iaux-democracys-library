@@ -208,7 +208,7 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       position: absolute;
       top: 0px;
       bottom: 0px;
-      right: 38px;
+      right: 35px;
       height: 100%;
       width: 610px;
       background-repeat: no-repeat;
@@ -222,7 +222,7 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       top: 0;
       right: 0;
       bottom: 0;
-      min-width: 35px;
+      min-width: 27px;
     }
 
     @media only screen and (min-width: 768px) {
@@ -363,19 +363,14 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     }
 
     section#democracys-library-main {
-      margin-bottom: 20px;
-      margin-bottom: 20px;
       display: flex;
       flex-direction: column;
     }
-    section#democracys-library-main > section {
-      margin-left: 10px !important;
-      margin-right: 10px !important;
+    section#democracys-library-main > * {
+      width: 100%;
     }
     section#democracys-library-main > *:not(:first-child) {
       margin-top: 10px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     /** Did You Know */
@@ -435,6 +430,8 @@ const ve=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     /** Resources */
     #resources-options {
       grid-area: 6 / 1 / 6 / 8;
+      width: 95%;
+      left: auto;
     }
 
     #resources-options > select {
