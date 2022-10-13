@@ -42,7 +42,7 @@ export class ItemPreviewImage extends LitElement {
 
     img {
       object-fit: cover;
-      width: 160px;
+      width: var(--ia-dl-resource-card-img-width, 160px);
       height: 260px;
     }
 

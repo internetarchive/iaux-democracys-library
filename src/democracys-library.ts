@@ -164,9 +164,13 @@ export class IaDemocracysLibrary extends LitElement {
             <slot name="action-bar-section"></slot>
           </div>
         </welcome-header>
-        <section id="top-carousel">${this.topCarousel}</section>
-        <section id="did-you-know">${this.factoids}</section>
-        <resources-highlights>
+        <section id="top-carousel" class="one-col-margin">
+          ${this.topCarousel}
+        </section>
+        <section id="did-you-know" class="one-col-margin">
+          ${this.factoids}
+        </section>
+        <resources-highlights class="one-col-margin">
           <arti-cle>
             <div class="title"><ti-tle class="green">Resources</ti-tle></div>
             <div class="map-img">
@@ -214,6 +218,11 @@ export class IaDemocracysLibrary extends LitElement {
     :host(:focus) {
       outline: none;
     }
+    @media only screen and (min-width: 551px) and (max-width: 650px) {
+      :host {
+        --ia-dl-resource-card-img-width: 140px !important;
+      }
+    }
 
     welcome-header {
       background-color: #e3fdd5;
@@ -223,15 +232,8 @@ export class IaDemocracysLibrary extends LitElement {
       display: flex;
       flex-direction: column;
     }
-    section#democracys-library-main > * {
-      width: 100%;
-    }
     section#democracys-library-main > *:not(:first-child) {
       margin-top: 10px;
-    }
-
-    section#democracys-library-main > * {
-      width: 100%;
     }
 
     /** Did You Know */
@@ -251,14 +253,17 @@ export class IaDemocracysLibrary extends LitElement {
       background-size: 28px;
       background-position: 0 25%;
     }
+
     @media only screen and (max-width: 550px) {
       section#did-you-know > * {
         width: 100%;
       }
     }
-    @media only screen and (min-width: 551px) and (max-width: 1300px) {
-      section#did-you-know > * {
-        width: 50%;
+    @media only screen and (max-width: 768px) {
+      section > .one-col-margin {
+        margin-left: 10px;
+        margin-right: 10px;
+        overflow: hidden;
       }
     }
     /** End Did You Know */

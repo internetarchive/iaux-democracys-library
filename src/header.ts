@@ -49,7 +49,6 @@ export class WelcomeHeader extends LitElement {
     .left {
       background-repeat: no-repeat;
       height: 100%;
-      width: 100%;
       z-index: 1;
       background-image: url('https://archive.org/download/democracys-library/web-component/banner-text.svg');
     }
@@ -109,6 +108,9 @@ export class WelcomeHeader extends LitElement {
     @media only screen and (max-width: 767px) {
       :host {
         height: var(--ia-dl-header-mobile-height, 88px) !important;
+      }
+      .left {
+        margin-left: 10px;
       }
     }
 
