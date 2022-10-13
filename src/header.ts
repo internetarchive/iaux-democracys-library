@@ -59,7 +59,7 @@ export class WelcomeHeader extends LitElement {
       position: absolute;
       top: 0px;
       bottom: 0px;
-      right: 38px;
+      right: 35px;
       height: 100%;
       width: 610px;
       background-repeat: no-repeat;

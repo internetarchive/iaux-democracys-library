@@ -177,19 +177,14 @@ export class IaDemocracysLibrary extends LitElement {
     }
 
     section#democracys-library-main {
-      margin-bottom: 20px;
-      margin-bottom: 20px;
       display: flex;
       flex-direction: column;
     }
-    section#democracys-library-main > section {
-      margin-left: 10px !important;
-      margin-right: 10px !important;
+    section#democracys-library-main > * {
+      width: 100%;
     }
     section#democracys-library-main > *:not(:first-child) {
       margin-top: 10px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     /** Did You Know */
@@ -249,6 +244,8 @@ export class IaDemocracysLibrary extends LitElement {
     /** Resources */
     #resources-options {
       grid-area: 6 / 1 / 6 / 8;
+      width: 95%;
+      left: auto;
     }
 
     #resources-options > select {
