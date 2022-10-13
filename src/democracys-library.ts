@@ -1,5 +1,7 @@
 import { html, css, LitElement, TemplateResult } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
+import { map } from 'lit/directives/map.js';
 import './item-preview-image';
 import { collectionsToHighlight } from './data/collections-to-highlight';
 import type { card } from './data/collections-to-highlight';
@@ -19,7 +21,12 @@ export class IaDemocracysLibrary extends LitElement {
 
   @property({ type: Array }) highlights: card[] = collectionsToHighlight;
 
+  @property({ type: Object }) availableResources:
+    | Record<string, []>
+    | undefined = undefined;
+
   firstUpdated(): void {
+    this.fetchAvailableResources();
     const fontStyle = document.createElement('style');
     fontStyle.innerHTML = `
     @font-face {
@@ -37,10 +44,23 @@ export class IaDemocracysLibrary extends LitElement {
     }
   }
 
+  async fetchAvailableResources(): Promise<void> {
+    const res = await fetch(
+      'https://archive.org/cors/democracys-library/web-component/regional-resources.json'
+    );
+    const data = await res.json();
+    const areas = Object.keys(data);
+    if (areas.length) {
+      this.availableResources = data;
+    } else {
+      this.availableResources = undefined;
+    }
+  }
+
   // <i><img src="https://archive.org/download/democracys-library/web-component/help.svg" alt="help icon"></i>
   get factoids(): TemplateResult[] {
     return this.didYouKnow.map((fact: Factoid, i) => {
-      const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+      const tintColor = i % 2 === 0 ? 'yellow' : ('green' as string);
       return html`
         <arti-cle>
           <div class="title">
@@ -106,11 +126,34 @@ export class IaDemocracysLibrary extends LitElement {
   }
 
   get resourcesOptions(): TemplateResult {
-    return html`<option>Select a resource</option>`;
+    const availableRegions = Object.keys(this.availableResources ?? {});
+    return html`
+      <option>Select a resource</option>
+      ${repeat(
+        availableRegions,
+        region => region,
+        region => {
+          const group = this.availableResources?.[region] ?? [];
+          return html`
+            <optgroup label=${region}>
+              ${map(group, (resource: Record<string, string>) => {
+                // eslint-disable-next-line dot-notation
+                const url = resource['URL'] as string;
+                const resourceName = resource['Organization Name'] as string;
+                return html`
+                  <option .value=${url} data-url=${url}>${resourceName}</option>
+                `;
+              })}
+            </optgroup>
+          `;
+        }
+      )}
+    `;
   }
 
   resourceSelected(e: Event): void {
-    console.log('resource selected ********', e);
+    const url = (e?.target as HTMLSelectElement).value;
+    window.open(url, '_blank');
   }
 
   render() {
@@ -141,7 +184,7 @@ export class IaDemocracysLibrary extends LitElement {
               >
               <select
                 name="select-resources"
-                @select=${(e: Event) => this.resourceSelected(e)}
+                @change=${(e: Event) => this.resourceSelected(e)}
               >
                 ${this.resourcesOptions}
               </select>
