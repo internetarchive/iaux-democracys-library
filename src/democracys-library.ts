@@ -76,7 +76,7 @@ export class IaDemocracysLibrary extends LitElement {
 
   resourceCard(card: card, tintColor: 'yellow' | 'green'): TemplateResult {
     return html`
-      <arti-cle>
+      <arti-cle tabindex="0">
         <div class="title">
           <ti-tle class=${tintColor ?? ''}>${card.title}</ti-tle>
         </div>
@@ -84,17 +84,18 @@ export class IaDemocracysLibrary extends LitElement {
           class="item-preview"
           href=${`https://archive.org/details/${card.id}`}
           target="_blank"
-          title=${`Explore item: ${card.id}`}>
+          title=${`Explore item: ${card.id}`}
+        >
           <item-preview-image
             src=${card.image}
             class=${tintColor ?? ''}
           ></item-preview-image>
         </a>
-        <p>${card.blurb}</p>
-        <a class="link-to-collection" href=${
-          card.link
-        } tab="_blank">Browse the ${card.collectionTitle}</a>
-      </article>
+        <p tabindex="0">${card.blurb}</p>
+        <a class="link-to-collection" href=${card.link} tab="_blank"
+          >Browse the ${card.collectionTitle}</a
+        >
+      </arti-cle>
     `;
   }
 
@@ -187,7 +188,7 @@ export class IaDemocracysLibrary extends LitElement {
                 >Select a resource:</label
               >
               <select
-                name="select-resources"
+                id="select-resources"
                 @change=${(e: Event) => this.resourceSelected(e)}
               >
                 ${this.resourcesOptions}
