@@ -73,7 +73,7 @@ export class WelcomeHeader extends LitElement {
       top: 0;
       right: 0;
       bottom: 0;
-      min-width: 35px;
+      min-width: 27px;
     }
 
     @media only screen and (min-width: 768px) {
