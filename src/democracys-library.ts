@@ -60,13 +60,20 @@ export class IaDemocracysLibrary extends LitElement {
         <div class="title">
           <ti-tle class=${tintColor ?? ''}>${card.title}</ti-tle>
         </div>
-        <item-preview-image
-          src=${card.image}
-          alt="preview image."
-          class=${tintColor ?? ''}
-        ></item-preview-image>
+        <a
+          class="item-preview"
+          href=${`https://archive.org/details/${card.id}`}
+          target="_blank"
+          title=${`Explore item: ${card.id}`}>
+          <item-preview-image
+            src=${card.image}
+            class=${tintColor ?? ''}
+          ></item-preview-image>
+        </a>
         <p>${card.blurb}</p>
-        <a href=${card.link} tab="_blank">Browse the ${card.collectionTitle}</a>
+        <a class="link-to-collection" href=${
+          card.link
+        } tab="_blank">Browse the ${card.collectionTitle}</a>
       </article>
     `;
   }
@@ -77,10 +84,9 @@ export class IaDemocracysLibrary extends LitElement {
   ): TemplateResult {
     const url = `https://archive.org/details/${card.id}`;
     return html`
-      <a href=${url}>
+      <a href=${url} target="_blank" title=${`Explore item: ${card.title}`}>
         <item-preview-image
           src=${card.image}
-          alt=${`Go to: ${card.title}`}
           class=${tintColor ?? ''}
         ></item-preview-image>
       </a>
@@ -193,6 +199,7 @@ export class IaDemocracysLibrary extends LitElement {
     }
     section#did-you-know > * {
       border: 1px solid transparent;
+      width: 50%;
     }
     .did-you-know-title {
       background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
@@ -202,12 +209,12 @@ export class IaDemocracysLibrary extends LitElement {
       background-size: 28px;
       background-position: 0 25%;
     }
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 550px) {
       section#did-you-know > * {
         width: 100%;
       }
     }
-    @media only screen and (min-width: 501px) and (max-width: 1300px) {
+    @media only screen and (min-width: 551px) and (max-width: 1300px) {
       section#did-you-know > * {
         width: 50%;
       }
@@ -219,12 +226,13 @@ export class IaDemocracysLibrary extends LitElement {
       width: 100%;
       overflow: hidden;
       position: relative;
+      max-height: 220px;
     }
 
     .map-img img {
       object-fit: contain;
-      max-height: 100%;
-      max-width: 100%;
+      height: 100%;
+      width: 100%;
     }
 
     .map-overlay {
@@ -240,8 +248,9 @@ export class IaDemocracysLibrary extends LitElement {
 
     /** Resources */
     #resources-options {
-      grid-area: 8 / 1 / 8 / 8;
+      grid-area: 6 / 1 / 6 / 8;
     }
+
     #resources-options > select {
       width: 100%;
       display: block;
@@ -259,6 +268,8 @@ export class IaDemocracysLibrary extends LitElement {
     }
     .carousel > * {
       scroll-snap-align: center;
+      display: block;
+      position: relative;
     }
     .carousel::-webkit-scrollbar {
       display: none; /* Safari and Chrome */

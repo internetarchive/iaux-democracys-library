@@ -27,6 +27,12 @@ export class WelcomeHeader extends LitElement {
       margin-bottom: 10px;
     }
 
+    ::slotted(*.action-bar-section) {
+      height: 100%;
+      float: right;
+      padding: 0 10px;
+    }
+
     section,
     section > * {
       height: inherit;
@@ -37,6 +43,7 @@ export class WelcomeHeader extends LitElement {
       width: 1px;
       position: absolute;
       margin-left: -1000px;
+      overflow: hidden;
     }
 
     .left {
@@ -52,7 +59,7 @@ export class WelcomeHeader extends LitElement {
       position: absolute;
       top: 0px;
       bottom: 0px;
-      right: 50px;
+      right: 38px;
       height: 100%;
       width: 610px;
       background-repeat: no-repeat;
@@ -66,15 +73,15 @@ export class WelcomeHeader extends LitElement {
       top: 0;
       right: 0;
       bottom: 0;
-      min-width: 50px;
+      min-width: 35px;
     }
 
     @media only screen and (min-width: 768px) {
       .pic {
-        right: 100px;
+        right: 88px;
       }
       .action-bar-section {
-        width: 100px;
+        width: 82px;
       }
     }
 
@@ -103,31 +110,9 @@ export class WelcomeHeader extends LitElement {
       :host {
         height: var(--ia-dl-header-mobile-height, 88px) !important;
       }
-
-      // this is when action bar drops to mini view
-      .pic {
-        right: 50px !important;
-      }
-      .action-bar-section {
-        width: 50px !important;
-      }
     }
 
-    @media only screen and (max-width: 767px) {
-      :host {
-        height: var(--ia-dl-header-mobile-height, 88px) !important;
-      }
-
-      // this is when action bar drops to mini view
-      .pic {
-        right: 50px !important;
-      }
-      .action-bar-section {
-        width: 50px !important;
-      }
-    }
-
-    @media only screen and (max-width: 420px) {
+    @media only screen and (max-width: 500px) {
       .pic {
         background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-mini.webp');
       }

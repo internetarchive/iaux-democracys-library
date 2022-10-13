@@ -45,7 +45,7 @@ export const collectionsToHighlight: card[] = [
     image: 'https://archive.org/services/img/potentialforweat00advi',
   },
   {
-    title: 'EDIBLE AND POISONOUS MUSHROOMS OF CANADA',
+    title: 'EDIBLE & POISONOUS MUSHROOMS OF CANADA',
     collectionTitle: `Agriculture and Agri-Food Canada Library`,
     id: 'ediblepoisonousm00grov',
     blurb:

@@ -21,7 +21,7 @@ export class ArticleBlock extends LitElement {
       grid-area: 1 / 1 / 2 / 8;
     }
 
-    ::slotted(item-preview-image) {
+    ::slotted(*.item-preview) {
       grid-area: 2 / 1 / 8 / 3;
     }
 
@@ -39,7 +39,7 @@ export class ArticleBlock extends LitElement {
       word-break: break-word;
     }
 
-    ::slotted(a),
+    ::slotted(a.link-to-collection),
     ::slotted(select) {
       grid-area: 7 / 3 / 7 / 8;
       vertical-align: baseline;
@@ -47,7 +47,7 @@ export class ArticleBlock extends LitElement {
     }
 
     ::slotted(*.map-img) {
-      grid-area: 2 / 1 / 7 / 8;
+      grid-area: 2 / 1 / 6 / 8;
     }
   `;
 }
