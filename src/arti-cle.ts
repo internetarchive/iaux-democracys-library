@@ -34,7 +34,7 @@ export class ArticleBlock extends LitElement {
       grid-area: 2 / 3 / 7 / 8;
       overflow: auto;
       padding: 0px 10px 10px 0;
-      max-height: 220px;
+      max-height: 150px;
       margin: 0 auto;
       word-break: break-word;
     }

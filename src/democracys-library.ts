@@ -187,6 +187,10 @@ export class IaDemocracysLibrary extends LitElement {
       margin-top: 10px;
     }
 
+    section#democracys-library-main > * {
+      width: 100%;
+    }
+
     /** Did You Know */
     section#did-you-know {
       display: flex;
