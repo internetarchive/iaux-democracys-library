@@ -60,7 +60,7 @@ export class IaDemocracysLibrary extends LitElement {
   // <i><img src="https://archive.org/download/democracys-library/web-component/help.svg" alt="help icon"></i>
   get factoids(): TemplateResult[] {
     return this.didYouKnow.map((fact: Factoid, i) => {
-      const tintColor = i % 2 === 0 ? 'yellow' : ('green' as string);
+      const tintColor = (i % 2 === 0 ? 'yellow' : 'green') as string;
       return html`
         <arti-cle>
           <div class="title">
@@ -68,7 +68,7 @@ export class IaDemocracysLibrary extends LitElement {
               ><span class="did-you-know-title">DID YOU KNOW?</span></ti-tle
             >
           </div>
-          <p class="full-width">${fact.details}</p>
+          <p class="full-width" tabindex="0">${fact.details}</p>
         </arti-cle>
       `;
     });
@@ -186,7 +186,7 @@ export class IaDemocracysLibrary extends LitElement {
             <div id="resources-options">
               <label
                 for="select-resources"
-                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px"
+                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px; overflow: hidden;"
                 >Select a resource:</label
               >
               <select
