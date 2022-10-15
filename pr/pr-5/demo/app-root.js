@@ -295,7 +295,7 @@ const Oe=function(){const e=document.createElement("link").relList;if(e&&e.suppo
               ><span class="did-you-know-title">DID YOU KNOW?</span></ti-tle
             >
           </div>
-          <p class="full-width">${e.details}</p>
+          <p class="full-width" tabindex="0">${e.details}</p>
         </arti-cle>
       `})}resourceCard(e,t){return f`
       <arti-cle tabindex="0">
@@ -367,7 +367,7 @@ const Oe=function(){const e=document.createElement("link").relList;if(e&&e.suppo
             <div id="resources-options">
               <label
                 for="select-resources"
-                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px"
+                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px; overflow: hidden;"
                 >Select a resource:</label
               >
               <select
