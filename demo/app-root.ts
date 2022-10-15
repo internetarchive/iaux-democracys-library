@@ -6,15 +6,37 @@ import '../src/democracys-library';
 export class AppRoot extends LitElement {
   render() {
     return html`
-      <ia-democracys-library title="Hello">
-        <div slot="my-slot">Some slotted content</div>
-      </ia-democracys-library>
+      <div class="match-ia-coll-margins">
+        <ia-democracys-library> </ia-democracys-library>
+      </div>
     `;
   }
 
   static styles = css`
     :host {
       display: block;
+    }
+
+    .match-ia-coll-margins {
+      margin-right: auto;
+      margin-left: auto;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    @media (min-width: 768px) {
+      .match-ia-coll-margins {
+        max-width: 750px;
+      }
+    }
+    @media (min-width: 992px) {
+      .match-ia-coll-margins {
+        max-width: 970px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .match-ia-coll-margins {
+        max-width: 1170px;
+      }
     }
   `;
 }

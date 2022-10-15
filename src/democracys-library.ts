@@ -1,29 +1,32 @@
 import { html, css, LitElement, TemplateResult } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { repeat } from 'lit/directives/repeat.js';
+import { map } from 'lit/directives/map.js';
 import './item-preview-image';
 import { collectionsToHighlight } from './data/collections-to-highlight';
 import type { card } from './data/collections-to-highlight';
 import './resources-highlights';
 import { carousel1, carousel1Title } from './data/carousel-1';
-import { carousel2, carousel2Title } from './data/carousel-2';
 import type { CarouselCard } from './data/carousel-1';
-import { headerImageUrl } from './data/header-image';
 import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
+import './arti-cle';
+import './header';
 
 @customElement('ia-democracys-library')
 export class IaDemocracysLibrary extends LitElement {
   @property({ type: Array }) carousel1: CarouselCard[] = carousel1;
 
-  @property({ type: Array }) carousel2: CarouselCard[] = carousel2;
-
   @property({ type: Array }) didYouKnow: Factoid[] = didYouKnow;
 
   @property({ type: Array }) highlights: card[] = collectionsToHighlight;
 
-  @property({ type: String }) fontSource = '';
+  @property({ type: Object }) availableResources:
+    | Record<string, []>
+    | undefined = undefined;
 
   firstUpdated(): void {
+    this.fetchAvailableResources();
     const fontStyle = document.createElement('style');
     fontStyle.innerHTML = `
     @font-face {
@@ -41,38 +44,58 @@ export class IaDemocracysLibrary extends LitElement {
     }
   }
 
+  async fetchAvailableResources(): Promise<void> {
+    const res = await fetch(
+      'https://archive.org/cors/democracys-library/web-component/regional-resources.json'
+    );
+    const data = await res.json();
+    const areas = Object.keys(data);
+    if (areas.length) {
+      this.availableResources = data;
+    } else {
+      this.availableResources = undefined;
+    }
+  }
+
   // <i><img src="https://archive.org/download/democracys-library/web-component/help.svg" alt="help icon"></i>
   get factoids(): TemplateResult[] {
     return this.didYouKnow.map((fact: Factoid, i) => {
-      const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+      const tintColor = (i % 2 === 0 ? 'yellow' : 'green') as string;
       return html`
-        <article>
+        <arti-cle>
           <div class="title">
-            <ti-tle class=${tintColor}><span>DID YOU KNOW?</span></ti-tle>
+            <ti-tle class=${tintColor}
+              ><span class="did-you-know-title">DID YOU KNOW?</span></ti-tle
+            >
           </div>
-          <p class="full-width">${fact.details}</p>
-        </article>
+          <p class="full-width" tabindex="0">${fact.details}</p>
+        </arti-cle>
       `;
     });
   }
 
-  resourceCard(
-    card: card,
-    tintColor: 'yellow' | 'green' | undefined
-  ): TemplateResult {
+  resourceCard(card: card, tintColor: 'yellow' | 'green'): TemplateResult {
     return html`
-      <article>
+      <arti-cle tabindex="0">
         <div class="title">
           <ti-tle class=${tintColor ?? ''}>${card.title}</ti-tle>
         </div>
-        <item-preview-image
-          src=${card.image}
-          alt="preview image."
-          class=${tintColor ?? ''}
-        ></item-preview-image>
-        <p>${card.blurb}</p>
-        <a href=${card.link} tab="_blank">Browse the ${card.collectionTitle}</a>
-      </article>
+        <a
+          class="item-preview"
+          href=${`https://archive.org/details/${card.id}`}
+          target="_blank"
+          title=${`Explore item: ${card.id}`}
+        >
+          <item-preview-image
+            src=${card.image}
+            class=${tintColor ?? ''}
+          ></item-preview-image>
+        </a>
+        <p tabindex="0">${card.blurb}</p>
+        <a class="link-to-collection" href=${card.link} tab="_blank"
+          >Browse the ${card.collectionTitle}</a
+        >
+      </arti-cle>
     `;
   }
 
@@ -82,10 +105,9 @@ export class IaDemocracysLibrary extends LitElement {
   ): TemplateResult {
     const url = `https://archive.org/details/${card.id}`;
     return html`
-      <a href=${url}>
+      <a href=${url} target="_blank" title=${`Explore item: ${card.title}`}>
         <item-preview-image
           src=${card.image}
-          alt=${`Go to: ${card.title}`}
           class=${tintColor ?? ''}
         ></item-preview-image>
       </a>
@@ -97,19 +119,7 @@ export class IaDemocracysLibrary extends LitElement {
       <ti-tle class="green">${carousel1Title}</ti-tle>
       <section id="carousel-1" class="carousel">
         ${this.carousel1.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'green' : 'yellow';
-          return this.carouselCard(card, tintColor);
-        })}
-      </section>
-    `;
-  }
-
-  get bottomCarousel(): TemplateResult {
-    return html`
-      <ti-tle class="green">${carousel2Title}</ti-tle>
-      <section id="carousel-2" class="carousel">
-        ${this.carousel2.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
           return this.carouselCard(card, tintColor);
         })}
       </section>
@@ -117,54 +127,84 @@ export class IaDemocracysLibrary extends LitElement {
   }
 
   get resourcesOptions(): TemplateResult {
-    return html`<option>Select an organization</option>`;
+    const availableRegions = Object.keys(this.availableResources ?? {});
+    return html`
+      <option>Select a resource</option>
+      ${repeat(
+        availableRegions,
+        region => region,
+        region => {
+          const group = this.availableResources?.[region] ?? [];
+          return html`
+            <optgroup label=${region}>
+              ${map(group, (resource: Record<string, string>) => {
+                // eslint-disable-next-line dot-notation
+                const url = resource['URL'] as string;
+                const resourceName = resource['Organization Name'] as string;
+                return html`
+                  <option .value=${url} data-url=${url}>${resourceName}</option>
+                `;
+              })}
+            </optgroup>
+          `;
+        }
+      )}
+    `;
   }
 
   resourceSelected(e: Event): void {
-    console.log('resource selected ********', e);
+    const url = (e?.target as HTMLSelectElement).value;
+    window.open(url, '_blank');
   }
 
   render() {
     return html`
       <section id="democracys-library-main">
-        <div id="header-img">
-          <img src=${headerImageUrl} alt="Welcome to Democracy's Library" />
-        </div>
-        <section id="top-carousel">${this.topCarousel}</section>
-        <section id="did-you-know">${this.factoids}</section>
-        <resources-highlights>
-          <article>
-            <div class="title"><ti-tle>REGIONAL ORGANIZATIONS</ti-tle></div>
-            <div id="map-img">
+        <welcome-header>
+          <div slot="action-bar-section">
+            <slot name="action-bar-section"></slot>
+          </div>
+        </welcome-header>
+        <section id="top-carousel" class="one-col-margin">
+          ${this.topCarousel}
+        </section>
+        <section id="did-you-know" class="one-col-margin">
+          ${this.factoids}
+        </section>
+        <resources-highlights class="one-col-margin">
+          <arti-cle>
+            <div class="title">
+              <ti-tle class="green">REGIONAL ORGANIZATIONS</ti-tle>
+            </div>
+            <div class="map-img">
               <img
                 src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
                 alt="map of united states and canada"
               />
-              <div id="map-overlay"></div>
+              <div class="map-overlay"></div>
             </div>
             <div id="resources-options">
               <label
                 for="select-resources"
-                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px"
+                style="position: absolute; height: 1px; width: 1px; margin-left: -1000px; overflow: hidden;"
                 >Select a resource:</label
               >
               <select
-                name="select-resources"
-                @select=${(e: Event) => this.resourceSelected(e)}
+                id="select-resources"
+                @change=${(e: Event) => this.resourceSelected(e)}
               >
                 ${this.resourcesOptions}
               </select>
             </div>
-          </article>
+          </arti-cle>
           ${
             // eslint-disable-next-line arrow-body-style
             this.highlights.map((card, i: number) => {
-              const tintColor = i % 2 === 0 ? 'green' : 'yellow';
+              const tintColor = i % 2 === 0 ? 'yellow' : 'green';
               return this.resourceCard(card, tintColor);
             })
           }
         </resources-highlights>
-        <section id="bottom-carousel">${this.bottomCarousel}</section>
       </section>
     `;
   }
@@ -182,119 +222,76 @@ export class IaDemocracysLibrary extends LitElement {
       outline: none;
     }
 
-    #header-img {
-      max-height: 150px;
-      width: 100%;
-      background-color: rgb(227, 253, 213);
-      margin: 0px auto;
-      overflow: hidden;
+    a {
+      color: #4b64ff;
+      text-decoration: none;
     }
 
-    #header-img img {
-      display: block;
-      object-fit: contain;
-      margin: 0px auto;
-      max-height: inherit;
+    @media only screen and (min-width: 501px) and (max-width: 650px) {
+      resources-highlights {
+        --ia-dl-resource-card-img-width: 110px !important;
+      }
     }
 
-    @media (max-width: 500px) {
-      #header-img {
-        max-height: 70px;
-      }
-    }
-    @media (max-width: 999px) {
-      #header-img {
-        max-height: 100px;
-      }
+    welcome-header {
+      background-color: #e3fdd5;
     }
 
     section#democracys-library-main {
-      margin-bottom: 20px;
-      margin-bottom: 20px;
       display: flex;
       flex-direction: column;
     }
-    section#democracys-library-main > section {
-      margin-left: 10px !important;
-      margin-right: 10px !important;
-    }
     section#democracys-library-main > *:not(:first-child) {
       margin-top: 10px;
-      margin-bottom: 10px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
+    /** Did You Know */
     section#did-you-know {
       display: flex;
       gap: 20px;
     }
     section#did-you-know > * {
       border: 1px solid transparent;
+      width: 50%;
     }
-    @media only screen and (max-width: 500px) {
+    .did-you-know-title {
+      background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
+      padding-left: 30px;
+      background-repeat: no-repeat;
+      vertical-align: initial;
+      background-size: 28px;
+      background-position: 0 25%;
+    }
+
+    @media only screen and (max-width: 550px) {
       section#did-you-know > * {
         width: 100%;
       }
     }
-    @media only screen and (min-width: 501px) and (max-width: 1300px) {
-      section#did-you-know > * {
-        width: 50%;
+    @media only screen and (max-width: 768px) {
+      section > .one-col-margin {
+        margin-left: 10px;
+        margin-right: 10px;
+        overflow: hidden;
       }
     }
+    /** End Did You Know */
 
-    a {
-      color: #4b64ff;
-      text-decoration: none;
-    }
-
-    /* Resource/Collection Highlight */
-    article {
-      display: grid;
-      gap: 0px 20px;
-    }
-    article > * {
-      border: 1px solid transparent;
-    }
-    article > .title {
-      grid-area: 1 / 1 / 2 / 8;
-    }
-    article > item-preview-image {
-      grid-area: 2 / 1 / 8 / 3;
-    }
-    article > p.full-width {
-      grid-area: 2 / 1 / 7 / 7;
-    }
-    article > p {
-      grid-area: 2 / 3 / 7 / 8;
-      overflow: auto;
-      padding: 0px 10px 10px 0;
-      max-height: 220px;
-      margin: 0 auto;
-      word-break: break-word;
-    }
-    article > a,
-    article > select {
-      grid-area: 7 / 3 / 7 / 8;
-      vertical-align: baseline;
-      display: flex;
-    }
-
-    /* subparts of article */
-    #map-img {
+    /* MAP */
+    .map-img {
       width: 100%;
-      grid-area: 2 / 1 / 7 / 8;
       overflow: hidden;
       position: relative;
+      max-height: 220px;
     }
 
-    #map-img img {
+    .map-img img {
       object-fit: contain;
-      max-height: 100%;
-      max-width: 100%;
+      height: 100%;
+      width: 100%;
     }
 
-    #map-overlay {
+    .map-overlay {
       background-color: #ebebff;
       position: absolute;
       top: 0;
@@ -303,16 +300,20 @@ export class IaDemocracysLibrary extends LitElement {
       right: 0;
       mix-blend-mode: color;
     }
+    /* End MAP */
 
+    /** Resources */
     #resources-options {
-      grid-area: 8 / 1 / 8 / 8;
+      grid-area: 6 / 1 / 6 / 8;
+      width: 95%;
+      left: auto;
     }
 
     #resources-options > select {
       width: 100%;
       display: block;
     }
-    /* end subparts of article */
+    /** End Resources */
 
     /* Carousel */
     .carousel {
@@ -323,11 +324,11 @@ export class IaDemocracysLibrary extends LitElement {
       padding-bottom: 10px;
       scrollbar-width: none; /* Firefox */
     }
-
     .carousel > * {
       scroll-snap-align: center;
+      display: block;
+      position: relative;
     }
-
     .carousel::-webkit-scrollbar {
       display: none; /* Safari and Chrome */
     }
