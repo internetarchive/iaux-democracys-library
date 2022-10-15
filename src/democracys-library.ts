@@ -173,7 +173,9 @@ export class IaDemocracysLibrary extends LitElement {
         </section>
         <resources-highlights class="one-col-margin">
           <arti-cle>
-            <div class="title"><ti-tle class="green">Resources</ti-tle></div>
+            <div class="title">
+              <ti-tle class="green">REGIONAL ORGANIZATIONS</ti-tle>
+            </div>
             <div class="map-img">
               <img
                 src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
@@ -219,6 +221,12 @@ export class IaDemocracysLibrary extends LitElement {
     :host(:focus) {
       outline: none;
     }
+
+    a {
+      color: #4b64ff;
+      text-decoration: none;
+    }
+
     @media only screen and (min-width: 501px) and (max-width: 650px) {
       resources-highlights {
         --ia-dl-resource-card-img-width: 110px !important;
