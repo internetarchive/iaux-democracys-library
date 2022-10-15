@@ -129,7 +129,7 @@ export class IaDemocracysLibrary extends LitElement {
   get resourcesOptions(): TemplateResult {
     const availableRegions = Object.keys(this.availableResources ?? {});
     return html`
-      <option>Select a resource</option>
+      <option>Select an organization</option>
       ${repeat(
         availableRegions,
         region => region,
@@ -187,7 +187,7 @@ export class IaDemocracysLibrary extends LitElement {
               <label
                 for="select-resources"
                 style="position: absolute; height: 1px; width: 1px; margin-left: -1000px; overflow: hidden;"
-                >Select an organization:</label
+                >Here are some resources:</label
               >
               <select
                 id="select-resources"
