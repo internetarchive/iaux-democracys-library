@@ -49,7 +49,7 @@ export const collectionsToHighlight: card[] = [
     collectionTitle: `Agriculture and Agri-Food Canada Library`,
     id: 'ediblepoisonousm00grov',
     blurb:
-      "From this guide from Agriculture Canada—'Actually there is only one test to find out whether a mushroom or any other plant is poisonous and that is to eat it. If it makes you sick or kills you it is poisonous...' ",
+      'From the guide: "Actually there is only one test to find out whether a mushroom or any other plant is poisonous and that is to eat it. If it makes you sick or kills you it is poisonous."',
     link: 'https://archive.org/details/canadianagriculturallibrary',
     image: 'https://archive.org/services/img/ediblepoisonousm00grov',
   },

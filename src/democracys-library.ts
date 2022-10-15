@@ -117,7 +117,7 @@ export class IaDemocracysLibrary extends LitElement {
   }
 
   get resourcesOptions(): TemplateResult {
-    return html`<option>Select a resource</option>`;
+    return html`<option>Select an organization</option>`;
   }
 
   resourceSelected(e: Event): void {
@@ -134,7 +134,7 @@ export class IaDemocracysLibrary extends LitElement {
         <section id="did-you-know">${this.factoids}</section>
         <resources-highlights>
           <article>
-            <div class="title"><ti-tle>Resources</ti-tle></div>
+            <div class="title"><ti-tle>REGIONAL ORGANIZATIONS</ti-tle></div>
             <div id="map-img">
               <img
                 src="https://archive.org/cors/democracys-library/web-component/US%2BCA%20map.png"
@@ -241,6 +241,11 @@ export class IaDemocracysLibrary extends LitElement {
       section#did-you-know > * {
         width: 50%;
       }
+    }
+
+    a {
+      color: #4b64ff;
+      text-decoration: none;
     }
 
     /* Resource/Collection Highlight */
