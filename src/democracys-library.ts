@@ -187,7 +187,7 @@ export class IaDemocracysLibrary extends LitElement {
               <label
                 for="select-resources"
                 style="position: absolute; height: 1px; width: 1px; margin-left: -1000px; overflow: hidden;"
-                >Select a resource:</label
+                >Select an organization:</label
               >
               <select
                 id="select-resources"
