@@ -154,7 +154,7 @@ export class IaDemocracysLibrary extends LitElement {
 
   resourceSelected(e: Event): void {
     const url = (e?.target as HTMLSelectElement).value;
-    window.open(url, '_blank');
+    window.location.href = url;
   }
 
   render() {
