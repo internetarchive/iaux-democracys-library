@@ -4,7 +4,7 @@ export type CarouselCard = {
   image: string;
 };
 
-export const carousel1Title = 'INTERESTING GOVERNMENT DOCS';
+export const carousel1Title = 'COLLECTION HIGHLIGHTS';
 
 export const carousel1: CarouselCard[] = [
   {
