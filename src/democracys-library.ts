@@ -12,6 +12,7 @@ import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
 import './arti-cle';
 import './header';
+import { resourceCardLink } from './data/resource-card-link';
 
 @customElement('ia-democracys-library')
 export class IaDemocracysLibrary extends LitElement {
@@ -195,6 +196,9 @@ export class IaDemocracysLibrary extends LitElement {
               >
                 ${this.resourcesOptions}
               </select>
+              <a class="gov-world-sites" href=${resourceCardLink.link}
+                >${resourceCardLink.linkText}</a
+              >
             </div>
           </arti-cle>
           ${
@@ -299,6 +303,10 @@ export class IaDemocracysLibrary extends LitElement {
       left: 0;
       right: 0;
       mix-blend-mode: color;
+    }
+    .gov-world-sites {
+      padding: 5px 5px 5px 0;
+      display: block;
     }
     /* End MAP */
 
