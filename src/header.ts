@@ -80,7 +80,7 @@ export class WelcomeHeader extends LitElement {
         right: 88px;
       }
       .action-bar-section {
-        width: 82px;
+        margin-right: 5px;
       }
     }
 
