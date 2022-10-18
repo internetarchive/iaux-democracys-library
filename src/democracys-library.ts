@@ -12,6 +12,7 @@ import { didYouKnow, Factoid } from './data/did-you-know';
 import './ti-tle';
 import './arti-cle';
 import './header';
+import { resourceCardLink } from './data/resource-card-link';
 
 @customElement('ia-democracys-library')
 export class IaDemocracysLibrary extends LitElement {
@@ -65,10 +66,27 @@ export class IaDemocracysLibrary extends LitElement {
         <arti-cle>
           <div class="title">
             <ti-tle class=${tintColor}
-              ><span class="did-you-know-title">DID YOU KNOW?</span></ti-tle
+              ><span class="did-you-know-title">${fact.cardTitle}</span></ti-tle
             >
           </div>
           <p class="full-width" tabindex="0">${fact.details}</p>
+          <div class="factoid-link">
+            <a
+              href=${fact.link}
+              target="_blank"
+              class="factoid-link ${fact.donateCard ? 'donate' : ''}"
+              @click=${() => {
+                if ((window as any).archive_analytics) {
+                  (window as any).archive_analytics?.send_event(
+                    'DemocracysLibrary',
+                    'FactoidLinkClicked',
+                    fact.link
+                  );
+                }
+              }}
+              >${fact.linkText}</a
+            >
+          </div>
         </arti-cle>
       `;
     });
@@ -85,6 +103,15 @@ export class IaDemocracysLibrary extends LitElement {
           href=${`https://archive.org/details/${card.id}`}
           target="_blank"
           title=${`Explore item: ${card.id}`}
+          @click=${() => {
+            if ((window as any).archive_analytics) {
+              (window as any).archive_analytics?.send_event(
+                'DemocracysLibrary',
+                'ResourceCardItemImageClick',
+                card.id
+              );
+            }
+          }}
         >
           <item-preview-image
             src=${card.image}
@@ -92,7 +119,19 @@ export class IaDemocracysLibrary extends LitElement {
           ></item-preview-image>
         </a>
         <p tabindex="0">${card.blurb}</p>
-        <a class="link-to-collection" href=${card.link} tab="_blank"
+        <a
+          class="link-to-collection"
+          href=${card.link}
+          tab="_blank"
+          @click=${() => {
+            if ((window as any).archive_analytics) {
+              (window as any).archive_analytics?.send_event(
+                'DemocracysLibrary',
+                'ResourceCardCollectionLinkClick',
+                card.link
+              );
+            }
+          }}
           >Browse the ${card.collectionTitle}</a
         >
       </arti-cle>
@@ -105,7 +144,20 @@ export class IaDemocracysLibrary extends LitElement {
   ): TemplateResult {
     const url = `https://archive.org/details/${card.id}`;
     return html`
-      <a href=${url} target="_blank" title=${`Explore item: ${card.title}`}>
+      <a
+        href=${url}
+        target="_blank"
+        title=${`Explore item: ${card.title}`}
+        @click=${() => {
+          if ((window as any).archive_analytics) {
+            (window as any).archive_analytics?.send_event(
+              'DemocracysLibrary',
+              'CaroselCardClick',
+              card.id
+            );
+          }
+        }}
+      >
         <item-preview-image
           src=${card.image}
           class=${tintColor ?? ''}
@@ -154,6 +206,15 @@ export class IaDemocracysLibrary extends LitElement {
 
   resourceSelected(e: Event): void {
     const url = (e?.target as HTMLSelectElement).value;
+
+    if ((window as any).archive_analytics) {
+      (window as any).archive_analytics?.send_event(
+        'DemocracysLibrary',
+        'ResourceSelected',
+        url
+      );
+    }
+
     window.location.href = url;
   }
 
@@ -195,6 +256,20 @@ export class IaDemocracysLibrary extends LitElement {
               >
                 ${this.resourcesOptions}
               </select>
+              <a
+                class="gov-world-sites"
+                href=${resourceCardLink.link}
+                @click=${() => {
+                  if ((window as any).archive_analytics) {
+                    (window as any).archive_analytics?.send_event(
+                      'DemocracysLibrary',
+                      'AitGovWorldSites',
+                      resourceCardLink.link
+                    );
+                  }
+                }}
+                >${resourceCardLink.linkText}</a
+              >
             </div>
           </arti-cle>
           ${
@@ -253,11 +328,9 @@ export class IaDemocracysLibrary extends LitElement {
     section#did-you-know > * {
       border: 1px solid transparent;
       width: 50%;
+      padding-bottom: 10px;
     }
     .did-you-know-title {
-      background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
-      padding-left: 30px;
-      background-repeat: no-repeat;
       vertical-align: initial;
       background-size: 28px;
       background-position: 0 25%;
@@ -300,6 +373,10 @@ export class IaDemocracysLibrary extends LitElement {
       right: 0;
       mix-blend-mode: color;
     }
+    .gov-world-sites {
+      padding: 5px 5px 5px 0;
+      display: block;
+    }
     /* End MAP */
 
     /** Resources */
@@ -312,6 +389,22 @@ export class IaDemocracysLibrary extends LitElement {
     #resources-options > select {
       width: 100%;
       display: block;
+    }
+
+    a.donate {
+      border: 1px solid black;
+      padding: 5px 20px;
+      font-family: 'Teko', sans-serif;
+      font-size: 20px;
+      text-decoration: none;
+      color: #000 !important;
+      background-color: #e3fdd5;
+      box-shadow: 5px 5px #333;
+    }
+    a.donate:active {
+      background-color: #b5caaa;
+      box-shadow: 2px 2px #333;
+      border: 2px inner solid #e3fdd5;
     }
     /** End Resources */
 

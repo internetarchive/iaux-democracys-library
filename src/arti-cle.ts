@@ -26,15 +26,19 @@ export class ArticleBlock extends LitElement {
     }
 
     ::slotted(p.full-width) {
-      grid-area: 2 / 1 / 7 / 7;
+      grid-area: 2 / 1 / 7 / 8;
       margin-left: 0;
+    }
+
+    ::slotted(div.factoid-link) {
+      grid-column-end: 8;
+      grid-column-start: 1;
     }
 
     ::slotted(p) {
       grid-area: 2 / 3 / 7 / 8;
       overflow: auto;
       padding: 0px 10px 10px 0;
-      max-height: 175px;
       margin: 0 auto;
       word-break: break-word;
     }
