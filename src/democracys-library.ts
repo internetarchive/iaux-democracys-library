@@ -75,6 +75,15 @@ export class IaDemocracysLibrary extends LitElement {
               href=${fact.link}
               target="_blank"
               class="factoid-link ${fact.donateCard ? 'donate' : ''}"
+              @click=${() => {
+                if ((window as any).archive_analytics) {
+                  (window as any).archive_analytics?.send_event(
+                    'DemocracysLibrary',
+                    'FactoidLinkClicked',
+                    fact.link
+                  );
+                }
+              }}
               >${fact.linkText}</a
             >
           </div>
@@ -94,6 +103,15 @@ export class IaDemocracysLibrary extends LitElement {
           href=${`https://archive.org/details/${card.id}`}
           target="_blank"
           title=${`Explore item: ${card.id}`}
+          @click=${() => {
+            if ((window as any).archive_analytics) {
+              (window as any).archive_analytics?.send_event(
+                'DemocracysLibrary',
+                'ResourceCardItemImageClick',
+                card.id
+              );
+            }
+          }}
         >
           <item-preview-image
             src=${card.image}
@@ -101,7 +119,19 @@ export class IaDemocracysLibrary extends LitElement {
           ></item-preview-image>
         </a>
         <p tabindex="0">${card.blurb}</p>
-        <a class="link-to-collection" href=${card.link} tab="_blank"
+        <a
+          class="link-to-collection"
+          href=${card.link}
+          tab="_blank"
+          @click=${() => {
+            if ((window as any).archive_analytics) {
+              (window as any).archive_analytics?.send_event(
+                'DemocracysLibrary',
+                'ResourceCardCollectionLinkClick',
+                card.link
+              );
+            }
+          }}
           >Browse the ${card.collectionTitle}</a
         >
       </arti-cle>
@@ -114,7 +144,20 @@ export class IaDemocracysLibrary extends LitElement {
   ): TemplateResult {
     const url = `https://archive.org/details/${card.id}`;
     return html`
-      <a href=${url} target="_blank" title=${`Explore item: ${card.title}`}>
+      <a
+        href=${url}
+        target="_blank"
+        title=${`Explore item: ${card.title}`}
+        @click=${() => {
+          if ((window as any).archive_analytics) {
+            (window as any).archive_analytics?.send_event(
+              'DemocracysLibrary',
+              'CaroselCardClick',
+              card.id
+            );
+          }
+        }}
+      >
         <item-preview-image
           src=${card.image}
           class=${tintColor ?? ''}
@@ -163,6 +206,15 @@ export class IaDemocracysLibrary extends LitElement {
 
   resourceSelected(e: Event): void {
     const url = (e?.target as HTMLSelectElement).value;
+
+    if ((window as any).archive_analytics) {
+      (window as any).archive_analytics?.send_event(
+        'DemocracysLibrary',
+        'ResourceSelected',
+        url
+      );
+    }
+
     window.location.href = url;
   }
 
@@ -204,7 +256,18 @@ export class IaDemocracysLibrary extends LitElement {
               >
                 ${this.resourcesOptions}
               </select>
-              <a class="gov-world-sites" href=${resourceCardLink.link}
+              <a
+                class="gov-world-sites"
+                href=${resourceCardLink.link}
+                @click=${() => {
+                  if ((window as any).archive_analytics) {
+                    (window as any).archive_analytics?.send_event(
+                      'DemocracysLibrary',
+                      'AitGovWorldSites',
+                      resourceCardLink.link
+                    );
+                  }
+                }}
                 >${resourceCardLink.linkText}</a
               >
             </div>
