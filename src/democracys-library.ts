@@ -66,10 +66,18 @@ export class IaDemocracysLibrary extends LitElement {
         <arti-cle>
           <div class="title">
             <ti-tle class=${tintColor}
-              ><span class="did-you-know-title">DID YOU KNOW?</span></ti-tle
+              ><span class="did-you-know-title">${fact.cardTitle}</span></ti-tle
             >
           </div>
           <p class="full-width" tabindex="0">${fact.details}</p>
+          <div class="factoid-link">
+            <a
+              href=${fact.link}
+              target="_blank"
+              class="factoid-link ${fact.donateCard ? 'donate' : ''}"
+              >${fact.linkText}</a
+            >
+          </div>
         </arti-cle>
       `;
     });
@@ -257,11 +265,9 @@ export class IaDemocracysLibrary extends LitElement {
     section#did-you-know > * {
       border: 1px solid transparent;
       width: 50%;
+      padding-bottom: 10px;
     }
     .did-you-know-title {
-      background-image: url(https://archive.org/download/democracys-library/web-component/help.svg);
-      padding-left: 30px;
-      background-repeat: no-repeat;
       vertical-align: initial;
       background-size: 28px;
       background-position: 0 25%;
@@ -320,6 +326,22 @@ export class IaDemocracysLibrary extends LitElement {
     #resources-options > select {
       width: 100%;
       display: block;
+    }
+
+    a.donate {
+      border: 1px solid black;
+      padding: 5px 20px;
+      font-family: 'Teko', sans-serif;
+      font-size: 20px;
+      text-decoration: none;
+      color: #000 !important;
+      background-color: #e3fdd5;
+      box-shadow: 5px 5px #333;
+    }
+    a.donate:active {
+      background-color: #b5caaa;
+      box-shadow: 2px 2px #333;
+      border: 2px inner solid #e3fdd5;
     }
     /** End Resources */
 
