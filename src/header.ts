@@ -50,7 +50,7 @@ export class WelcomeHeader extends LitElement {
       background-repeat: no-repeat;
       height: 100%;
       z-index: 1;
-      background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-beta.svg');
+      background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-2.svg');
     }
 
     .pic {
@@ -64,7 +64,7 @@ export class WelcomeHeader extends LitElement {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: right bottom;
-      background-image: url('https://archive.org/download/democracys-library/web-component/banner-image.webp');
+      background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-2.webp');
     }
 
     .action-bar-section {
@@ -101,7 +101,7 @@ export class WelcomeHeader extends LitElement {
         height: 150px !important;
       }
       .left {
-        background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-mini-beta.svg');
+        background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-mini-2.svg');
       }
     }
 
@@ -116,7 +116,7 @@ export class WelcomeHeader extends LitElement {
 
     @media only screen and (max-width: 510px) {
       .pic {
-        background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-mini.webp');
+        background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-mini-2.webp');
       }
     }
   `;
