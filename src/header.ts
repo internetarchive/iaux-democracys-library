@@ -50,7 +50,7 @@ export class WelcomeHeader extends LitElement {
       background-repeat: no-repeat;
       height: 100%;
       z-index: 1;
-      background-image: url('https://archive.org/download/democracys-library/web-component/banner-text.svg');
+      background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-beta.svg');
     }
 
     .pic {
@@ -101,7 +101,7 @@ export class WelcomeHeader extends LitElement {
         height: 150px !important;
       }
       .left {
-        background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-mini.svg');
+        background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-mini-beta.svg');
       }
     }
 
