@@ -114,7 +114,7 @@ export class WelcomeHeader extends LitElement {
       }
     }
 
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 510px) {
       .pic {
         background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-mini.webp');
       }
