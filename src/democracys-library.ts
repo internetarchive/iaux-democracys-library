@@ -58,7 +58,6 @@ export class IaDemocracysLibrary extends LitElement {
     }
   }
 
-  // <i><img src="https://archive.org/download/democracys-library/web-component/help.svg" alt="help icon"></i>
   get factoids(): TemplateResult[] {
     return this.didYouKnow.map((fact: Factoid, i) => {
       const tintColor = (i % 2 === 0 ? 'yellow' : 'green') as string;
