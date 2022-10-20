@@ -9,8 +9,8 @@ export class WelcomeHeader extends LitElement {
         <span class="celebration-title"
           >Welcome to Democracy's Library collection.</span
         >
-        <div class="left"></div>
         <div class="pic"></div>
+        <div class="left"></div>
         <div class="action-bar-section">
           <slot name="action-bar-section"></slot>
         </div>
@@ -47,14 +47,18 @@ export class WelcomeHeader extends LitElement {
     }
 
     .left {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
       background-repeat: no-repeat;
       height: 100%;
-      z-index: 1;
+      z-index: 2;
       background-image: url('https://archive.org/download/democracys-library/web-component/banner-text-2.svg');
     }
 
     .pic {
-      z-index: 2;
+      z-index: 1;
       position: absolute;
       top: 0px;
       bottom: 0px;
