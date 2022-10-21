@@ -298,6 +298,8 @@ export class IaDemocracysLibrary extends LitElement {
 
     h3 {
       margin: 0;
+      /** Teko is already bold, adding for safari's default styling */
+      font-weight: initial;
     }
 
     a {
