@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-@customElement('arti-cle')
+@customElement('dl-article')
 export class ArticleBlock extends LitElement {
   render() {
     return html`<slot></slot>`;

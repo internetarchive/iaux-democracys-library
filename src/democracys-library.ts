@@ -9,8 +9,8 @@ import './resources-highlights';
 import { carousel1, carousel1Title } from './data/carousel-1';
 import type { CarouselCard } from './data/carousel-1';
 import { didYouKnow, Factoid } from './data/did-you-know';
-import './ti-tle';
-import './arti-cle';
+import './dl-title';
+import './dl-article';
 import './header';
 import { resourceCardLink } from './data/resource-card-link';
 
@@ -62,11 +62,11 @@ export class IaDemocracysLibrary extends LitElement {
     return this.didYouKnow.map((fact: Factoid, i) => {
       const tintColor = (i % 2 === 0 ? 'yellow' : 'green') as string;
       return html`
-        <arti-cle>
+        <dl-article tabindex="0">
           <div class="title">
-            <ti-tle class=${tintColor}
-              ><span class="did-you-know-title">${fact.cardTitle}</span></ti-tle
-            >
+            <dl-title class=${tintColor}>
+              <h3 class="did-you-know-title">${fact.cardTitle}</h3>
+            </dl-title>
           </div>
           <p class="full-width" tabindex="0">${fact.details}</p>
           <div class="factoid-link">
@@ -86,16 +86,16 @@ export class IaDemocracysLibrary extends LitElement {
               >${fact.linkText}</a
             >
           </div>
-        </arti-cle>
+        </dl-article>
       `;
     });
   }
 
   resourceCard(card: card, tintColor: 'yellow' | 'green'): TemplateResult {
     return html`
-      <arti-cle tabindex="0">
+      <dl-article tabindex="0">
         <div class="title">
-          <ti-tle class=${tintColor ?? ''}>${card.title}</ti-tle>
+          <dl-title class=${tintColor ?? ''}><h3>${card.title}</h3></dl-title>
         </div>
         <a
           class="item-preview"
@@ -133,7 +133,7 @@ export class IaDemocracysLibrary extends LitElement {
           }}
           >Browse the ${card.collectionTitle}</a
         >
-      </arti-cle>
+      </dl-article>
     `;
   }
 
@@ -167,7 +167,7 @@ export class IaDemocracysLibrary extends LitElement {
 
   get topCarousel(): TemplateResult {
     return html`
-      <ti-tle class="green">${carousel1Title}</ti-tle>
+      <dl-title class="green"><h3>${carousel1Title}</h3></dl-title>
       <section id="carousel-1" class="carousel">
         ${this.carousel1.map((card, i) => {
           const tintColor = i % 2 === 0 ? 'yellow' : 'green';
@@ -232,9 +232,9 @@ export class IaDemocracysLibrary extends LitElement {
           ${this.factoids}
         </section>
         <resources-highlights class="one-col-margin">
-          <arti-cle>
+          <dl-article tabindex="0">
             <div class="title">
-              <ti-tle class="green">REGIONAL ORGANIZATIONS</ti-tle>
+              <dl-title class="green"><h3>REGIONAL ORGANIZATIONS</h3></dl-title>
             </div>
             <div class="map-img">
               <img
@@ -270,7 +270,7 @@ export class IaDemocracysLibrary extends LitElement {
                 >${resourceCardLink.linkText}</a
               >
             </div>
-          </arti-cle>
+          </dl-article>
           ${
             // eslint-disable-next-line arrow-body-style
             this.highlights.map((card, i: number) => {
@@ -294,6 +294,10 @@ export class IaDemocracysLibrary extends LitElement {
 
     :host(:focus) {
       outline: none;
+    }
+
+    h3 {
+      margin: 0;
     }
 
     a {

@@ -2,8 +2,8 @@
 /* eslint-disable no-useless-escape */
 import { html, fixture, expect } from '@open-wc/testing';
 
-import { TitleSection } from '../src/ti-tle';
-import '../src/ti-tle';
+import { TitleSection } from '../src/dl-title';
+import '../src/dl-title';
 
 describe('`<ti-tle>`, TitleSection', () => {
   it('Has specific styles', async () => {
