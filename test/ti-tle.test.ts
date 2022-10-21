@@ -5,10 +5,10 @@ import { html, fixture, expect } from '@open-wc/testing';
 import { TitleSection } from '../src/dl-title';
 import '../src/dl-title';
 
-describe('`<ti-tle>`, TitleSection', () => {
+describe('`<dl-title>`, TitleSection', () => {
   it('Has specific styles', async () => {
     const el = await fixture<TitleSection>(
-      html`<ti-tle><h3>foo bar</h3></ti-tle>`
+      html`<dl-title><h3>foo bar</h3></dl-title>`
     );
 
     const slot = el.shadowRoot?.querySelector('slot');

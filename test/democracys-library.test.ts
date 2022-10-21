@@ -63,7 +63,7 @@ describe('IaDemocracysLibrary', () => {
     const carouselContainer = sections?.[1];
     expect(carouselContainer).to.exist;
     // expect(carousel?.children).to.equal(33);
-    expect(carouselContainer?.children[0].tagName).to.equal('TI-TLE');
+    expect(carouselContainer?.children[0].tagName).to.equal('DL-TITLE');
     expect(carouselContainer?.children[0].innerHTML).to.contain(carousel1Title);
 
     expect(carouselContainer?.children[1].tagName).to.equal('SECTION');
