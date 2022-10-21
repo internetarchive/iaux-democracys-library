@@ -436,6 +436,8 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
 
     h3 {
       margin: 0;
+      /** Teko is already bold, adding for safari's default styling */
+      font-weight: initial;
     }
 
     a {
