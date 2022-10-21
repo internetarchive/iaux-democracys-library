@@ -118,9 +118,12 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       }
     }
   `;te=y([C("resources-highlights")],te);const tt="COLLECTION HIGHLIGHTS",it=[{id:"MH07D7178",title:"Fundraising for Social Change, Part One",image:"https://archive.org/services/img/MH07D7178"},{id:"CAT92272736",title:"Two keys for appraising forest fire fuels",image:"https://archive.org/services/img/CAT92272736"},{id:"CAT79708698031",title:"Hamburger\u2014Questions and Answers",image:"https://archive.org/services/img/CAT79708698031"},{id:"usda-posters",title:"U.S. Department of Agriculture Poster Collection",image:"https://archive.org/services/img/CAT31123678"},{id:"selectedpolishso00army",title:"Selected Polish songs",image:"https://archive.org/services/img/selectedpolishso00army"},{id:"blueprintforfutu9611unit",title:"Blueprint for the future",image:"https://archive.org/services/img/blueprintforfutu9611unit"},{id:"introductionlapt00albe",title:"Introduction \xE0 la p\xE2tisserie",image:"https://archive.org/services/img/introductionlapt00albe"},{id:"hintsonmountainl94youn",title:"Hints on mountain-lion trapping",image:"https://archive.org/services/img/hintsonmountainl94youn"},{id:"drylandfarmingin00cott",title:"Dry land farming in the Southwest",image:"https://archive.org/services/img/drylandfarmingin00cott"}],ot=[{cardTitle:"ABOUT THIS PROJECT",details:"Democracy's Library brings together more than 700 collections from over 50 government organizations, archived by the Internet Archive since 2006. With more than half a million documents (and counting) from local, regional, and national governments, we're just getting started!",link:"http://blog.archive.org/2022/09/06/building-democracys-library-celebrate-with-the-internet-archive-on-october-19/",linkText:"Learn more"},{cardTitle:"WHAT'S NEXT?",details:"This is just the beginning. Democracy's Library will continue to grow and be updated over time. We'll be adding more information from all over the world, along with useful tools to help find and access what you need. You can help us grow by making a contribution today!",link:"https://archive.org/donate/?origin=iawww-democlibrycllctn",linkText:"DONATE",donateCard:!0}];let ie=class extends ${render(){return f` <span><slot></slot></span> `}};ie.styles=S`
+    :host,
+    ::slotted(*) {
+      font-size: 2.5rem;
+    }
     :host {
       font-family: 'Teko', sans-serif;
-      font-size: 2.5rem;
       padding: 10px 10px 5px 0;
       background-repeat: no-repeat;
       background-size: cover;
@@ -134,7 +137,7 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     :host(.green) {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 379 115' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m2.41535907.06436505 93.98160413 2.05968771 93.9636758.42943203 93.981604 2.05968771 93.963677.42943203-.665728 8.52369197-2.808745 8.5057642-.665728 8.523692-2.808745 8.5057641-1.871974-.0001517-.305648 2.5778912 2.129108 16.5918028-.996866 8.389818-90.463508 2.9353281-90.36899 4.449321-70.310096 2.2808389 70.18701.1005118 94.051638 1.4916745 94.184497.1335401.687706 8.9709079-1.47682 9.4913393.690908 8.8960033-1.472546 9.39132-94.020429-3.36343-94.324131-2.010171-93.1214334-3.337782-94.27554848-2.008784 1.27882743-7.2656845-.85881548-7.374232 1.27882743-7.2656841-.85881547-7.3742321 7.71912497.1217028.0436635-1.448196 2.2974858-8.048923.2360666-7.9550062 2.2974858-8.0489229 89.0683703-4.7902162 158.503928-5.8247357-167.8631141-2.9324015-92.63274412.0113194 1.47781288-8.9465155-2.26795466-14.9397675z' fill='%23e3fdd5' fill-rule='evenodd'/%3E%3C/svg%3E");
     }
-  `;ie=y([C("ti-tle")],ie);let oe=class extends ${render(){return f`<slot></slot>`}};oe.styles=S`
+  `;ie=y([C("dl-title")],ie);let oe=class extends ${render(){return f`<slot></slot>`}};oe.styles=S`
     :host {
       display: grid;
       gap: 0px 20px;
@@ -180,7 +183,7 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
     ::slotted(*.map-img) {
       grid-area: 2 / 1 / 6 / 8;
     }
-  `;oe=y([C("arti-cle")],oe);let se=class extends ${render(){return f`
+  `;oe=y([C("dl-article")],oe);let se=class extends ${render(){return f`
       <section class="celebration-header">
         <span class="celebration-title"
           >Welcome to Democracy's Library collection.</span
@@ -301,11 +304,11 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
       font-family: "Teko";
       src: url(https://archive.org/cors/democracys-library/web-component/Teko-SemiBold.ttf);
     }`,e.setAttribute("id","teko-font"),document.head.appendChild(e)}disconnectedCallback(){const e=document.head.querySelector("#teko-font");e&&document.head.removeChild(e)}async fetchAvailableResources(){const t=await(await fetch("https://archive.org/cors/democracys-library/web-component/regional-resources.json")).json();Object.keys(t).length?this.availableResources=t:this.availableResources=void 0}get factoids(){return this.didYouKnow.map((e,t)=>{const i=t%2===0?"yellow":"green";return f`
-        <arti-cle>
+        <dl-article tabindex="0">
           <div class="title">
-            <ti-tle class=${i}
-              ><span class="did-you-know-title">${e.cardTitle}</span></ti-tle
-            >
+            <dl-title class=${i}>
+              <h3 class="did-you-know-title">${e.cardTitle}</h3>
+            </dl-title>
           </div>
           <p class="full-width" tabindex="0">${e.details}</p>
           <div class="factoid-link">
@@ -317,11 +320,11 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
               >${e.linkText}</a
             >
           </div>
-        </arti-cle>
+        </dl-article>
       `})}resourceCard(e,t){return f`
-      <arti-cle tabindex="0">
+      <dl-article tabindex="0">
         <div class="title">
-          <ti-tle class=${t!=null?t:""}>${e.title}</ti-tle>
+          <dl-title class=${t!=null?t:""}><h3>${e.title}</h3></dl-title>
         </div>
         <a
           class="item-preview"
@@ -343,7 +346,7 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
           @click=${()=>{var i;window.archive_analytics&&((i=window.archive_analytics)===null||i===void 0||i.send_event("DemocracysLibrary","ResourceCardCollectionLinkClick",e.link))}}
           >Browse the ${e.collectionTitle}</a
         >
-      </arti-cle>
+      </dl-article>
     `}carouselCard(e,t){const i=`https://archive.org/details/${e.id}`;return f`
       <a
         href=${i}
@@ -357,7 +360,7 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
         ></item-preview-image>
       </a>
     `}get topCarousel(){return f`
-      <ti-tle class="green">${tt}</ti-tle>
+      <dl-title class="green"><h3>${tt}</h3></dl-title>
       <section id="carousel-1" class="carousel">
         ${this.carousel1.map((e,t)=>{const i=t%2===0?"yellow":"green";return this.carouselCard(e,i)})}
       </section>
@@ -384,9 +387,9 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
           ${this.factoids}
         </section>
         <resources-highlights class="one-col-margin">
-          <arti-cle>
+          <dl-article tabindex="0">
             <div class="title">
-              <ti-tle class="green">REGIONAL ORGANIZATIONS</ti-tle>
+              <dl-title class="green"><h3>REGIONAL ORGANIZATIONS</h3></dl-title>
             </div>
             <div class="map-img">
               <img
@@ -414,7 +417,7 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
                 >${X.linkText}</a
               >
             </div>
-          </arti-cle>
+          </dl-article>
           ${this.highlights.map((e,t)=>{const i=t%2===0?"yellow":"green";return this.resourceCard(e,i)})}
         </resources-highlights>
       </section>
@@ -429,6 +432,10 @@ const Le=function(){const e=document.createElement("link").relList;if(e&&e.suppo
 
     :host(:focus) {
       outline: none;
+    }
+
+    h3 {
+      margin: 0;
     }
 
     a {
