@@ -1,16 +1,19 @@
 import { html, css, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-@customElement('ti-tle')
+@customElement('dl-title')
 export class TitleSection extends LitElement {
   render() {
     return html` <span><slot></slot></span> `;
   }
 
   static styles = css`
+    :host,
+    ::slotted(*) {
+      font-size: 2.5rem;
+    }
     :host {
       font-family: 'Teko', sans-serif;
-      font-size: 2.5rem;
       padding: 10px 10px 5px 0;
       background-repeat: no-repeat;
       background-size: cover;
