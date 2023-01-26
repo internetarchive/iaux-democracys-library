@@ -59,8 +59,8 @@ export class IaDemocracysLibrary extends LitElement {
   }
 
   get factoids(): TemplateResult[] {
-    return this.didYouKnow.map((fact: Factoid, i) => {
-      const tintColor = (i % 2 === 0 ? 'yellow' : 'green') as string;
+    return this.didYouKnow.map((fact: Factoid) => {
+      const tintColor = 'black' as string;
       return html`
         <dl-article tabindex="0">
           <div class="title">
@@ -91,11 +91,14 @@ export class IaDemocracysLibrary extends LitElement {
     });
   }
 
-  resourceCard(card: card, tintColor: 'yellow' | 'green'): TemplateResult {
+  resourceCard(
+    card: card,
+    tintColor: 'yellow' | 'green' | 'blue' | 'black'
+  ): TemplateResult {
     return html`
       <dl-article tabindex="0">
         <div class="title">
-          <dl-title class=${tintColor ?? ''}><h3>${card.title}</h3></dl-title>
+          <dl-title class="black"><h3>${card.title}</h3></dl-title>
         </div>
         <a
           class="item-preview"
@@ -139,7 +142,7 @@ export class IaDemocracysLibrary extends LitElement {
 
   carouselCard(
     card: CarouselCard,
-    tintColor: 'yellow' | 'green' | undefined
+    tintColor: 'yellow' | 'green' | 'blue' | undefined
   ): TemplateResult {
     const url = `https://archive.org/details/${card.id}`;
     return html`
@@ -167,10 +170,10 @@ export class IaDemocracysLibrary extends LitElement {
 
   get topCarousel(): TemplateResult {
     return html`
-      <dl-title class="green"><h3>${carousel1Title}</h3></dl-title>
+      <dl-title class="black"><h3>${carousel1Title}</h3></dl-title>
       <section id="carousel-1" class="carousel">
-        ${this.carousel1.map((card, i) => {
-          const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+        ${this.carousel1.map(card => {
+          const tintColor = 'blue';
           return this.carouselCard(card, tintColor);
         })}
       </section>
@@ -234,7 +237,7 @@ export class IaDemocracysLibrary extends LitElement {
         <resources-highlights class="one-col-margin">
           <dl-article tabindex="0">
             <div class="title">
-              <dl-title class="green"><h3>REGIONAL ORGANIZATIONS</h3></dl-title>
+              <dl-title class="black"><h3>REGIONAL ORGANIZATIONS</h3></dl-title>
             </div>
             <div class="map-img">
               <img
@@ -273,8 +276,8 @@ export class IaDemocracysLibrary extends LitElement {
           </dl-article>
           ${
             // eslint-disable-next-line arrow-body-style
-            this.highlights.map((card, i: number) => {
-              const tintColor = i % 2 === 0 ? 'yellow' : 'green';
+            this.highlights.map(card => {
+              const tintColor = 'blue';
               return this.resourceCard(card, tintColor);
             })
           }
@@ -314,7 +317,7 @@ export class IaDemocracysLibrary extends LitElement {
     }
 
     welcome-header {
-      background-color: #e3fdd5;
+      background-color: #e5f1fa;
     }
 
     section#democracys-library-main {
@@ -370,7 +373,7 @@ export class IaDemocracysLibrary extends LitElement {
     }
 
     .map-overlay {
-      background-color: #ebebff;
+      background-color: #e5f1fa;
       position: absolute;
       top: 0;
       bottom: 0;
