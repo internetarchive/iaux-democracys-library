@@ -9,13 +9,14 @@ export type card = {
 
 export const collectionsToHighlight: card[] = [
   {
-    title: 'TROPICA ROADSTER CRASH REPORT',
-    collectionTitle: `National Transportation Library`,
-    id: 'finalreportofren00look',
+    title: 'JAN 6th COMMITTEE DOCS',
+    collectionTitle: `Jan 6th Committee Docs`,
+    id: 'report-final-report-jan-6-select-committee',
     blurb:
-      'What happens when you crash a Tropica Roadster straight into a barrier at 47kph? Find out in this report from the Vehicle Research and Test Center.',
-    link: 'https://archive.org/details/nationaltransportationlibrary',
-    image: 'https://archive.org/services/img/finalreportofren00look',
+      'The United States House Select Committee to Investigate the January 6th Attack on the United States Capitol (the January 6th Committee) is a bipartisan select committee of the U.S. House of Representatives established to investigate the U.S. Capitol attack.',
+    link: 'https://archive.org/details/jan-6th-committee-docs',
+    image:
+      'https://archive.org/services/img/report-final-report-jan-6-select-committee',
   },
   {
     title: 'EXCAVATION OF HUMMINGBIRD SHELTER',

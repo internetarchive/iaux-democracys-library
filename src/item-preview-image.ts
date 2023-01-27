@@ -29,8 +29,13 @@ export class ItemPreviewImage extends LitElement {
       background-color: #e3fdd5;
     }
 
+    :host(.blue) div#overlay {
+      background-color: #e5f1fa;
+    }
+
     :host(.yellow) img,
-    :host(.green) img {
+    :host(.green) img,
+    :host(.blue) img {
       mix-blend-mode: darken;
     }
 
