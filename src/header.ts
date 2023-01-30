@@ -60,15 +60,13 @@ export class WelcomeHeader extends LitElement {
 
     .pic {
       z-index: 1;
-      position: absolute;
       top: 0px;
       bottom: 0px;
-      right: 35px;
+      margin: auto;
       height: 100%;
-      width: 828px;
       background-repeat: no-repeat;
       background-size: contain;
-      background-position: right bottom;
+      background-position: center bottom;
       background-image: url('https://archive.org/download/democracys-library/web-component/banner-image-rebrand.webp');
     }
 
@@ -81,9 +79,6 @@ export class WelcomeHeader extends LitElement {
     }
 
     @media only screen and (min-width: 768px) {
-      .pic {
-        right: 88px;
-      }
       .action-bar-section {
         margin-right: 5px;
       }
