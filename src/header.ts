@@ -55,6 +55,7 @@ export class WelcomeHeader extends LitElement {
       background-repeat: no-repeat;
       height: 100%;
       z-index: 2;
+      pointer-events: none;
       background-image: url('https://archive.org/download/democracys-library/web-component/banner-logo-rebrand.svg');
     }
 
