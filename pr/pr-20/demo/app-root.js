@@ -618,6 +618,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
 
     /** DUMMY ACTION BAR STYLES */
     .action-bar-button {
+      display: block;
       padding: 0;
       border: 0;
       outline: 0;
