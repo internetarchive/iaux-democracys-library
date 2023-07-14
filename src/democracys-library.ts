@@ -78,7 +78,7 @@ export class IaDemocracysLibrary extends LitElement {
               target="_blank"
               class="factoid-link ${fact.donateCard ? 'donate' : ''}"
               @click=${() => {
-                this.analytics?.send_event(
+                this.analytics?.sendEvent(
                   'DemocracysLibrary',
                   'FactoidLinkClicked',
                   fact.link
@@ -107,7 +107,7 @@ export class IaDemocracysLibrary extends LitElement {
           target="_blank"
           title=${`Explore item: ${card.id}`}
           @click=${() => {
-            this.analytics?.send_event(
+            this.analytics?.sendEvent(
               'DemocracysLibrary',
               'ResourceCardItemImageClick',
               card.id
@@ -125,7 +125,7 @@ export class IaDemocracysLibrary extends LitElement {
           href=${card.link}
           tab="_blank"
           @click=${() => {
-            this.analytics?.send_event(
+            this.analytics?.sendEvent(
               'DemocracysLibrary',
               'ResourceCardCollectionLinkClick',
               card.link
@@ -148,7 +148,7 @@ export class IaDemocracysLibrary extends LitElement {
         target="_blank"
         title=${`Explore item: ${card.title}`}
         @click=${() => {
-          this.analytics?.send_event(
+          this.analytics?.sendEvent(
             'DemocracysLibrary',
             'CaroselCardClick',
             card.id
@@ -204,7 +204,7 @@ export class IaDemocracysLibrary extends LitElement {
   resourceSelected(e: Event): void {
     const url = (e?.target as HTMLSelectElement).value;
 
-    this.analytics?.send_event('DemocracysLibrary', 'ResourceSelected', url);
+    this.analytics?.sendEvent('DemocracysLibrary', 'ResourceSelected', url);
 
     window.location.href = url;
   }
@@ -251,7 +251,7 @@ export class IaDemocracysLibrary extends LitElement {
                 class="gov-world-sites"
                 href=${resourceCardLink.link}
                 @click=${() => {
-                  this.analytics?.send_event(
+                  this.analytics?.sendEvent(
                     'DemocracysLibrary',
                     'AitGovWorldSites',
                     resourceCardLink.link
