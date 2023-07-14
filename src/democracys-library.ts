@@ -22,6 +22,9 @@ export class IaDemocracysLibrary extends LitElement {
 
   @property({ type: Array }) highlights: card[] = collectionsToHighlight;
 
+  @property({ type: Object }) analytics: Record<any, any> | undefined =
+    undefined;
+
   @property({ type: Object }) availableResources:
     | Record<string, []>
     | undefined = undefined;
@@ -75,13 +78,11 @@ export class IaDemocracysLibrary extends LitElement {
               target="_blank"
               class="factoid-link ${fact.donateCard ? 'donate' : ''}"
               @click=${() => {
-                if ((window as any).archive_analytics) {
-                  (window as any).archive_analytics?.send_event(
-                    'DemocracysLibrary',
-                    'FactoidLinkClicked',
-                    fact.link
-                  );
-                }
+                this.analytics?.send_event(
+                  'DemocracysLibrary',
+                  'FactoidLinkClicked',
+                  fact.link
+                );
               }}
               >${fact.linkText}</a
             >
@@ -106,13 +107,11 @@ export class IaDemocracysLibrary extends LitElement {
           target="_blank"
           title=${`Explore item: ${card.id}`}
           @click=${() => {
-            if ((window as any).archive_analytics) {
-              (window as any).archive_analytics?.send_event(
-                'DemocracysLibrary',
-                'ResourceCardItemImageClick',
-                card.id
-              );
-            }
+            this.analytics?.send_event(
+              'DemocracysLibrary',
+              'ResourceCardItemImageClick',
+              card.id
+            );
           }}
         >
           <item-preview-image
@@ -126,13 +125,11 @@ export class IaDemocracysLibrary extends LitElement {
           href=${card.link}
           tab="_blank"
           @click=${() => {
-            if ((window as any).archive_analytics) {
-              (window as any).archive_analytics?.send_event(
-                'DemocracysLibrary',
-                'ResourceCardCollectionLinkClick',
-                card.link
-              );
-            }
+            this.analytics?.send_event(
+              'DemocracysLibrary',
+              'ResourceCardCollectionLinkClick',
+              card.link
+            );
           }}
           >Browse the ${card.collectionTitle}</a
         >
@@ -151,13 +148,11 @@ export class IaDemocracysLibrary extends LitElement {
         target="_blank"
         title=${`Explore item: ${card.title}`}
         @click=${() => {
-          if ((window as any).archive_analytics) {
-            (window as any).archive_analytics?.send_event(
-              'DemocracysLibrary',
-              'CaroselCardClick',
-              card.id
-            );
-          }
+          this.analytics?.send_event(
+            'DemocracysLibrary',
+            'CaroselCardClick',
+            card.id
+          );
         }}
       >
         <item-preview-image
@@ -209,13 +204,7 @@ export class IaDemocracysLibrary extends LitElement {
   resourceSelected(e: Event): void {
     const url = (e?.target as HTMLSelectElement).value;
 
-    if ((window as any).archive_analytics) {
-      (window as any).archive_analytics?.send_event(
-        'DemocracysLibrary',
-        'ResourceSelected',
-        url
-      );
-    }
+    this.analytics?.send_event('DemocracysLibrary', 'ResourceSelected', url);
 
     window.location.href = url;
   }
@@ -262,13 +251,11 @@ export class IaDemocracysLibrary extends LitElement {
                 class="gov-world-sites"
                 href=${resourceCardLink.link}
                 @click=${() => {
-                  if ((window as any).archive_analytics) {
-                    (window as any).archive_analytics?.send_event(
-                      'DemocracysLibrary',
-                      'AitGovWorldSites',
-                      resourceCardLink.link
-                    );
-                  }
+                  this.analytics?.send_event(
+                    'DemocracysLibrary',
+                    'AitGovWorldSites',
+                    resourceCardLink.link
+                  );
                 }}
                 >${resourceCardLink.linkText}</a
               >
