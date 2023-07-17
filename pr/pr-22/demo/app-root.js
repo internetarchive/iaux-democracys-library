@@ -317,7 +317,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
               href=${e.link}
               target="_blank"
               class="factoid-link ${e.donateCard?"donate":""}"
-              @click=${()=>{var i;(i=this.analytics)===null||i===void 0||i.sendEvent("DemocracysLibrary","FactoidLinkClicked",e.link)}}
+              @click=${()=>{var i;(i=this.analytics)===null||i===void 0||i.sendEvent({category:"DemocracysLibrary",action:"FactoidLinkClicked",label:e.link})}}
               >${e.linkText}</a
             >
           </div>
@@ -332,7 +332,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
           href=${`https://archive.org/details/${e.id}`}
           target="_blank"
           title=${`Explore item: ${e.id}`}
-          @click=${()=>{var i;(i=this.analytics)===null||i===void 0||i.sendEvent("DemocracysLibrary","ResourceCardItemImageClick",e.id)}}
+          @click=${()=>{var i;(i=this.analytics)===null||i===void 0||i.sendEvent({category:"DemocracysLibrary",action:"ResourceCardItemImageClick",label:e.id})}}
         >
           <item-preview-image
             src=${e.image}
@@ -344,7 +344,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
           class="link-to-collection"
           href=${e.link}
           tab="_blank"
-          @click=${()=>{var i;(i=this.analytics)===null||i===void 0||i.sendEvent("DemocracysLibrary","ResourceCardCollectionLinkClick",e.link)}}
+          @click=${()=>{var i;(i=this.analytics)===null||i===void 0||i.sendEvent({category:"DemocracysLibrary",action:"ResourceCardCollectionLinkClick",label:e.link})}}
           >Browse the ${e.collectionTitle}</a
         >
       </dl-article>
@@ -353,7 +353,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
         href=${i}
         target="_blank"
         title=${`Explore item: ${e.title}`}
-        @click=${()=>{var o;(o=this.analytics)===null||o===void 0||o.sendEvent("DemocracysLibrary","CaroselCardClick",e.id)}}
+        @click=${()=>{var o;(o=this.analytics)===null||o===void 0||o.sendEvent({category:"DemocracysLibrary",action:"CarouselCardClick",label:e.id})}}
       >
         <item-preview-image
           src=${e.image}
@@ -374,7 +374,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
                 `})}
             </optgroup>
           `})}
-    `}resourceSelected(e){var t;const i=(e==null?void 0:e.target).value;(t=this.analytics)===null||t===void 0||t.sendEvent("DemocracysLibrary","ResourceSelected",i),window.location.href=i}render(){return f`
+    `}resourceSelected(e){var t;const i=(e==null?void 0:e.target).value;(t=this.analytics)===null||t===void 0||t.sendEvent({category:"DemocracysLibrary",action:"ResourceSelected",label:i}),window.location.href=i}render(){return f`
       <section id="democracys-library-main">
         <welcome-header>
           <div slot="action-bar-section">
@@ -414,7 +414,7 @@ const Ue=function(){const e=document.createElement("link").relList;if(e&&e.suppo
               <a
                 class="gov-world-sites"
                 href=${X.link}
-                @click=${()=>{var e;(e=this.analytics)===null||e===void 0||e.sendEvent("DemocracysLibrary","AitGovWorldSites",X.link)}}
+                @click=${()=>{var e;(e=this.analytics)===null||e===void 0||e.sendEvent({category:"DemocracysLibrary",action:"AitGovWorldSites",label:X.link})}}
                 >${X.linkText}</a
               >
             </div>
