@@ -93,6 +93,7 @@
     ]
   },
   "dependencies": {
+    "@internetarchive/analytics-manager": "^0.1.2",
     "lit": "^2.4.0"
   }
 }

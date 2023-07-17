@@ -2,6 +2,7 @@ import { html, css, LitElement, TemplateResult } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { map } from 'lit/directives/map.js';
+import type { AnalyticsEvent } from '@internetarchive/analytics-manager';
 import './item-preview-image';
 import { collectionsToHighlight } from './data/collections-to-highlight';
 import type { card } from './data/collections-to-highlight';
@@ -79,10 +80,10 @@ export class IaDemocracysLibrary extends LitElement {
               class="factoid-link ${fact.donateCard ? 'donate' : ''}"
               @click=${() => {
                 this.analytics?.sendEvent({
-                  eventCategory: 'DemocracysLibrary',
-                  eventAction: 'FactoidLinkClicked',
-                  eventLabel: fact.link,
-                });
+                  category: 'DemocracysLibrary',
+                  action: 'FactoidLinkClicked',
+                  label: fact.link,
+                } as AnalyticsEvent);
               }}
               >${fact.linkText}</a
             >
@@ -108,10 +109,10 @@ export class IaDemocracysLibrary extends LitElement {
           title=${`Explore item: ${card.id}`}
           @click=${() => {
             this.analytics?.sendEvent({
-              eventCategory: 'DemocracysLibrary',
-              eventAction: 'ResourceCardItemImageClick',
-              eventLabel: card.id,
-            });
+              category: 'DemocracysLibrary',
+              action: 'ResourceCardItemImageClick',
+              label: card.id,
+            } as AnalyticsEvent);
           }}
         >
           <item-preview-image
@@ -126,10 +127,10 @@ export class IaDemocracysLibrary extends LitElement {
           tab="_blank"
           @click=${() => {
             this.analytics?.sendEvent({
-              eventCategory: 'DemocracysLibrary',
-              eventAction: 'ResourceCardCollectionLinkClick',
-              eventLabel: card.link,
-            });
+              category: 'DemocracysLibrary',
+              action: 'ResourceCardCollectionLinkClick',
+              label: card.link,
+            } as AnalyticsEvent);
           }}
           >Browse the ${card.collectionTitle}</a
         >
@@ -149,10 +150,10 @@ export class IaDemocracysLibrary extends LitElement {
         title=${`Explore item: ${card.title}`}
         @click=${() => {
           this.analytics?.sendEvent({
-            eventCategory: 'DemocracysLibrary',
-            eventAction: 'CarouselCardClick',
-            eventLabel: card.id,
-          });
+            category: 'DemocracysLibrary',
+            action: 'CarouselCardClick',
+            label: card.id,
+          } as AnalyticsEvent);
         }}
       >
         <item-preview-image
@@ -205,10 +206,10 @@ export class IaDemocracysLibrary extends LitElement {
     const url = (e?.target as HTMLSelectElement).value;
 
     this.analytics?.sendEvent({
-      eventCategory: 'DemocracysLibrary',
-      eventAction: 'ResourceSelected',
-      eventLabel: url,
-    });
+      category: 'DemocracysLibrary',
+      action: 'ResourceSelected',
+      label: url,
+    } as AnalyticsEvent);
 
     window.location.href = url;
   }
@@ -256,10 +257,10 @@ export class IaDemocracysLibrary extends LitElement {
                 href=${resourceCardLink.link}
                 @click=${() => {
                   this.analytics?.sendEvent({
-                    eventCategory: 'DemocracysLibrary',
-                    eventAction: 'AitGovWorldSites',
-                    eventLabel: resourceCardLink.link,
-                  });
+                    category: 'DemocracysLibrary',
+                    action: 'AitGovWorldSites',
+                    label: resourceCardLink.link,
+                  } as AnalyticsEvent);
                 }}
                 >${resourceCardLink.linkText}</a
               >
