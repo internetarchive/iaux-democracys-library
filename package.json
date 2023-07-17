@@ -7,7 +7,7 @@
   },
   "license": "AGPL-3.0-only",
   "author": "Internet Archive",
-  "version": "0.1.2",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
@@ -93,6 +93,7 @@
     ]
   },
   "dependencies": {
+    "@internetarchive/analytics-manager": "^0.1.2",
     "lit": "^2.4.0"
   }
 }

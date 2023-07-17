@@ -2,6 +2,7 @@ import { html, css, LitElement, TemplateResult } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { map } from 'lit/directives/map.js';
+import type { AnalyticsEvent } from '@internetarchive/analytics-manager';
 import './item-preview-image';
 import { collectionsToHighlight } from './data/collections-to-highlight';
 import type { card } from './data/collections-to-highlight';
@@ -21,6 +22,9 @@ export class IaDemocracysLibrary extends LitElement {
   @property({ type: Array }) didYouKnow: Factoid[] = didYouKnow;
 
   @property({ type: Array }) highlights: card[] = collectionsToHighlight;
+
+  @property({ type: Object }) analytics: Record<any, any> | undefined =
+    undefined;
 
   @property({ type: Object }) availableResources:
     | Record<string, []>
@@ -75,13 +79,11 @@ export class IaDemocracysLibrary extends LitElement {
               target="_blank"
               class="factoid-link ${fact.donateCard ? 'donate' : ''}"
               @click=${() => {
-                if ((window as any).archive_analytics) {
-                  (window as any).archive_analytics?.send_event(
-                    'DemocracysLibrary',
-                    'FactoidLinkClicked',
-                    fact.link
-                  );
-                }
+                this.analytics?.sendEvent({
+                  category: 'DemocracysLibrary',
+                  action: 'FactoidLinkClicked',
+                  label: fact.link,
+                } as AnalyticsEvent);
               }}
               >${fact.linkText}</a
             >
@@ -106,13 +108,11 @@ export class IaDemocracysLibrary extends LitElement {
           target="_blank"
           title=${`Explore item: ${card.id}`}
           @click=${() => {
-            if ((window as any).archive_analytics) {
-              (window as any).archive_analytics?.send_event(
-                'DemocracysLibrary',
-                'ResourceCardItemImageClick',
-                card.id
-              );
-            }
+            this.analytics?.sendEvent({
+              category: 'DemocracysLibrary',
+              action: 'ResourceCardItemImageClick',
+              label: card.id,
+            } as AnalyticsEvent);
           }}
         >
           <item-preview-image
@@ -126,13 +126,11 @@ export class IaDemocracysLibrary extends LitElement {
           href=${card.link}
           tab="_blank"
           @click=${() => {
-            if ((window as any).archive_analytics) {
-              (window as any).archive_analytics?.send_event(
-                'DemocracysLibrary',
-                'ResourceCardCollectionLinkClick',
-                card.link
-              );
-            }
+            this.analytics?.sendEvent({
+              category: 'DemocracysLibrary',
+              action: 'ResourceCardCollectionLinkClick',
+              label: card.link,
+            } as AnalyticsEvent);
           }}
           >Browse the ${card.collectionTitle}</a
         >
@@ -151,13 +149,11 @@ export class IaDemocracysLibrary extends LitElement {
         target="_blank"
         title=${`Explore item: ${card.title}`}
         @click=${() => {
-          if ((window as any).archive_analytics) {
-            (window as any).archive_analytics?.send_event(
-              'DemocracysLibrary',
-              'CaroselCardClick',
-              card.id
-            );
-          }
+          this.analytics?.sendEvent({
+            category: 'DemocracysLibrary',
+            action: 'CarouselCardClick',
+            label: card.id,
+          } as AnalyticsEvent);
         }}
       >
         <item-preview-image
@@ -209,13 +205,11 @@ export class IaDemocracysLibrary extends LitElement {
   resourceSelected(e: Event): void {
     const url = (e?.target as HTMLSelectElement).value;
 
-    if ((window as any).archive_analytics) {
-      (window as any).archive_analytics?.send_event(
-        'DemocracysLibrary',
-        'ResourceSelected',
-        url
-      );
-    }
+    this.analytics?.sendEvent({
+      category: 'DemocracysLibrary',
+      action: 'ResourceSelected',
+      label: url,
+    } as AnalyticsEvent);
 
     window.location.href = url;
   }
@@ -262,13 +256,11 @@ export class IaDemocracysLibrary extends LitElement {
                 class="gov-world-sites"
                 href=${resourceCardLink.link}
                 @click=${() => {
-                  if ((window as any).archive_analytics) {
-                    (window as any).archive_analytics?.send_event(
-                      'DemocracysLibrary',
-                      'AitGovWorldSites',
-                      resourceCardLink.link
-                    );
-                  }
+                  this.analytics?.sendEvent({
+                    category: 'DemocracysLibrary',
+                    action: 'AitGovWorldSites',
+                    label: resourceCardLink.link,
+                  } as AnalyticsEvent);
                 }}
                 >${resourceCardLink.linkText}</a
               >
