@@ -8,9 +8,9 @@ export const carousel1Title = 'COLLECTION HIGHLIGHTS';
 
 export const carousel1: CarouselCard[] = [
   {
-    id: 'MH07D7178',
-    title: 'Fundraising for Social Change, Part One',
-    image: 'https://archive.org/services/img/MH07D7178',
+    id: 'goody',
+    title: 'test foo',
+    image: 'https://archive.org/services/img/goody',
   },
   {
     id: 'CAT92272736',
