@@ -2,6 +2,10 @@
 
 # A web component that highlights documents across various governments found on archive.org
 
+> [!IMPORTANT]  
+> This repository is no longer in use for the [Democracy's Library collection](https://archive.org/details/democracys-library). If you are an IA staff member and would like to update the collection header, see the [Custom Collection Layout guide](https://docs.google.com/document/d/1uFaxIfbkKdn9RUaQ6QJ6_8IdYggmwMAmLumX-rqm090/edit?usp=sharing). 
+
+## Preview
 Demo App: https://internetarchive.github.io/iaux-democracys-library/main/demo/
 
 ## Usage
